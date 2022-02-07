@@ -1,6 +1,6 @@
 
 # Software Engineering Methods
-Master Build Status Develop Build Status ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/angus-dolan/sem-group-5/semGroup5/master?style=flat-square)
+Master Build Status  ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/angus-dolan/sem-group-5/semGroup5/master?style=flat-square)
 
 Develop Build Status ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/angus-dolan/sem-group-5/semGroup5/develop?style=flat-square)
 
