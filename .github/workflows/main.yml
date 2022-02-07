@@ -1,4 +1,4 @@
-name: A workflow for our group SME app 
+name: A workflow for my Hello World App
 on: push
 
 jobs:
