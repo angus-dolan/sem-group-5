@@ -4,6 +4,6 @@ Master Build Status Develop Build Status ![GitHub Workflow Status (branch)](http
 
 Develop Build Status ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/angus-dolan/sem-group-5/semGroup5/develop?style=flat-square)
 
-[![LICENSE](https://img.shields.io/github/license/angus-dolan/sem-group-5.svg?style=flat-square)](https://github.com/GLefterov/sem-group-5/blob/master/LICENSE)
+License [![LICENSE](https://img.shields.io/github/license/angus-dolan/sem-group-5.svg?style=flat-square)](https://github.com/GLefterov/sem-group-5/blob/master/LICENSE)
 
-[![Releases](https://img.shields.io/github/release/angus-dolan/sem-group-5/all.svg?style=flat-square)](https://github.com/angus-dolan/sem-group-5/releases)
+Release [![Releases](https://img.shields.io/github/release/angus-dolan/sem-group-5/all.svg?style=flat-square)](https://github.com/angus-dolan/sem-group-5/releases)
