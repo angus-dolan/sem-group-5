@@ -1,4 +1,4 @@
-name: semGroup5
+name: A workflow for my Hello World App
 on: push
 
 jobs:
