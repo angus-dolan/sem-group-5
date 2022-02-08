@@ -7,5 +7,6 @@
 7. Help each other when you can. If in any doubt, ask another team member.
 8. Try to contribute as much as you can.
 9. Meeting times will be agreed on by all members.
+10. All matters concerning the project should be discussed in the discord group server.
 
 Breach of any of the rules will be followed by a conduct hearing.
