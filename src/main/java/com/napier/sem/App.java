@@ -74,6 +74,51 @@ public class App
         }
     }
 
+    public Country getCountry(String code)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT code, name, population "
+                            + "FROM world.country "
+                            + "WHERE Code = " + code;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new country if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Country ctry = new Country();
+                ctry.code = rset.getString("code");
+                ctry.name = rset.getString("name");
+                ctry.population = Integer.parseInt(rset.getString("population"));
+                return ctry;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country data");
+            return null;
+        }
+    }
+
+    public void displayCountry(Country ctry)
+    {
+        if (ctry != null)
+        {
+            System.out.println(
+                ctry.code + " "
+                + ctry.name + " "
+                + ctry.population + "\n");
+        }
+    }
+
     public static void main(String[] args)
     {
         // Create new Application
@@ -81,6 +126,12 @@ public class App
 
         // Connect to database
         a.connect();
+
+        // Get country
+        Country ctry = a.getCountry("'GBR'");
+
+        // Display results
+        a.displayCountry(ctry);
 
         // Disconnect from database
         a.disconnect();
