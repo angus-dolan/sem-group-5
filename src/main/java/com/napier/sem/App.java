@@ -74,6 +74,11 @@ public class App
         }
     }
 
+    /**
+     * Create a Country object based on its code
+     * @param code  Country code
+     * @return      Country object created
+     */
     public Country getCountry(String code)
     {
         try
@@ -108,6 +113,10 @@ public class App
         }
     }
 
+    /**
+     * Display the country object's data
+     * @param ctry  Country object to display
+     */
     public void displayCountry(Country ctry)
     {
         if (ctry != null)
