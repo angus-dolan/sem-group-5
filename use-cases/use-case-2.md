@@ -36,7 +36,7 @@ A request to add this specific feature to the system is made.
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organisation requests the report on a given continent. 
+1. Organisation requests a population report on a given continent. 
 2. Employee extracts population data of the given continent.
 3. Employee organises the data as requested.
 4. Employee has a produced report.
