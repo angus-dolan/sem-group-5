@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-Database contains population data on the given region.
+Database contains population data on the given region and its countries.
 
 ### Success End Condition
 
