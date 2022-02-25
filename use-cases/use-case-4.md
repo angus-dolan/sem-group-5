@@ -36,7 +36,7 @@ A request to add this specific feature to the system is made.
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organisation requests the report on a given region.
+1. Organisation requests a population report on countries in a given region.
 2. Employee extracts population data of the given region.
 3. Employee organises the data as requested.
 4. Employee has a produced report.
