@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-As an *organisation employee* I want *provide a report of of all the cities in a continent organised by largest population to smallest* so that *I can design and implement a new system to allow easy access to this population information.*
+As an *organisation employee* I want *provide a report of all the cities in a continent organised by largest population to smallest* so that *I can design and implement a new system to allow easy access to this population information.*
 
 ### Scope
 
