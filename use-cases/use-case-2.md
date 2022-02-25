@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-Database contains population data on the given continent.
+Database contains population data on the given continent, its countries and their capital cities.
 
 ### Success End Condition
 
