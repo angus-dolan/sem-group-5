@@ -47,11 +47,9 @@ Employee needs to provide report
 
 ## EXTENSIONS
 
-*put here the extensions, one at a time, each referring to the step of the main scenario*
-
-2. **Data is incomplete**
+1. **Data is incomplete**
     1. Employee requests the data is updated.
-3. **Data not sorted correctly**
+2. **Data not sorted correctly**
     1. Employee requests the system is updated.
 
 ## SUB-VARIATIONS
