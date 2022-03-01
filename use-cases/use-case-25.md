@@ -1,10 +1,10 @@
-# USE CASE: 25 Provide a report on the population of people, people living in cities, and people not living in cities on each continent
+# USE CASE: 26 Provide a report on the population of people, people living in cities, and people not living in cities in each region
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As an *organisation employee*, I need to *provide a report on the population of people, people living in cities, and people not living in cities on each continent*, so that *I can design and implement a new system to allow easy access to this population information.*
+As an *organisation employee*, *I need to provide a report on the population of people, people living in cities, and people not living in cities in each region*, so that *I can design and implement a new system to allow easy access to this population information.*
 
 ### Scope
 
@@ -16,12 +16,7 @@ Primary task.
 
 ### Preconditions
 
-Database provides data for each continent and continent city populations.
-
-The total population of each continent will need to be SUMMED (total_pop).
-The total population of cities within each continent will need to be SUMMED (cities_pop).
-
-For each continent ((total_pop) - (cities_pop)) will be performed, the remainer will be the total population not living in cities for each continent.
+Database provides data for population, city population and population outwidth cities for each region.
 
 ### Success End Condition
 
@@ -41,18 +36,16 @@ Employee needs to provide report
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organisation requests a population report on all capital cities in a continent.
-2. Population of continent and population of cities in the continent extracted from database.
-3. Remainder calculation performed to give population outwidth cities.
+1. Organisation requests a population report for total population, city population and non-city population in each region.
+2. Employee extracts population data of all regions.
+3. Employee organises the data as requested.
 4. Employee has a produced report.
 
 ## EXTENSIONS
 
 2. **Data is incomplete**
     1. Employee requests the data is updated.
-3. **Remainder is < 0**
-   1. If remainder is negative, result is wrong. As city population cannot be greater than continent population.
-   2. Employee requests the data is updated.
+    2. Otherwise, the employee produces an incomplete report.
    
 ## SUB-VARIATIONS
 

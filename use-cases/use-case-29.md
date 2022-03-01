@@ -1,10 +1,10 @@
-# USE CASE: 29 Provide a report on the population of a continent
+# USE CASE: 30 Provide a report on the population of a region
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As an *organisation employee*, I have to *provide a report on the population of a continent*, so that *I can design and implement a new system to allow easy access to this population information.*
+As an *organisation employee*, I have to *provide a report on the population of a region*, so that *I can design and implement a new system to allow easy access to this population information.*
 
 ### Scope
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-Database provides population data for each continent.
+Database provides population data for each region.
 
 ### Success End Condition
 
@@ -36,8 +36,8 @@ Employee needs to provide report
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organisation requests a population report for a continent.
-2. Employee extracts population data for continent.
+1. Organisation requests a population report for a region.
+2. Employee extracts population data for region.
 3. Employee organises the data as requested.
 4. Employee has a produced report.
 

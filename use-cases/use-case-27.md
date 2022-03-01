@@ -1,10 +1,10 @@
-# USE CASE: 27 Provide a report on the population of people, people living in cities, and people not living in cities in each country
+# USE CASE: 28 Provide a report on the population of the world
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As an *organisation employee*, I need to *provide a report on the population of people, people living in cities, and people not living in cities in each country*, so that *I can design and implement a new system to allow easy access to this population information.*
+As an *organisation employee*, I have to *provide a report on the population of the world*, so that *I can design and implement a new system to allow easy access to this population information.*
 
 ### Scope
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-Database provides data for population, city population and population outwidth cities for each country.
+Database provides population data for each country in `country.Population`, this can simply be SUMMED and the result will be the world population.
 
 ### Success End Condition
 
@@ -36,8 +36,8 @@ Employee needs to provide report
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organisation requests a population report for total population, city population and non-city population in each country.
-2. Employee extracts population data of all country.
+1. Organisation requests a population report for entire world.
+2. Employee extracts population data for world.
 3. Employee organises the data as requested.
 4. Employee has a produced report.
 

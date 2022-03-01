@@ -1,10 +1,10 @@
-# USE CASE: 32 Provide a report on the population of a district
+# USE CASE: 33 Provide a report on the population of a city
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As an *organisation employee*, I have to *provide a report on the population of a district*, so that *I can design and implement a new system to allow easy access to this population information.*
+As an *organisation employee*, I have to *provide a report on the population of a city*, so that *I can design and implement a new system to allow easy access to this population information*.
 
 ### Scope
 
@@ -36,8 +36,8 @@ Employee needs to provide report
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organisation requests a population report for a district.
-2. Employee extracts population data for district.
+1. Organisation requests a population report for a city.
+2. Employee extracts population data for city.
 3. Employee organises the data as requested.
 4. Employee has a produced report.
 
