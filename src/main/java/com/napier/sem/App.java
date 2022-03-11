@@ -46,6 +46,26 @@ public class App
         System.out.println("Report on all the countries in " + region + " organised by largest population to smallest.");
         displayCountries(regionCountries);   //Display results
 
+        // Produce a report of top N populated countries in the world
+        int n = 10;
+        ArrayList<Country> topNInWorld = a.getTopNCountriesInWorld(n);
+        System.out.println("Report of top " + n + " populated countries in the world");
+        displayTopCountries(topNInWorld);
+
+        // Produce a report of top N populated countries in a continent
+        int n2 = 10;
+        String continent2 = "Europe";
+        ArrayList<Country> topNInContinent = a.getTopNCountriesInContinent(continent2, n2);
+        System.out.println("Report of top " + n2 + " populated countries in " + continent2);
+        displayTopCountries(topNInContinent);
+
+        // Produce a report of top N populated countries in a region
+        int n3 = 10;
+        String region2 = "Baltic Countries";
+        ArrayList<Country> topNInRegion = a.getTopNCountriesInRegion(region2, n3);
+        System.out.println("Report of top " + n3 + " populated countries in " + region2);
+        displayTopCountries(topNInRegion);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -128,6 +148,23 @@ public class App
     }
 
     /**
+     * Returns top N populated countries in the world
+     * @param limit number of countries to return
+     * @return  list of Country objects
+     */
+    public ArrayList<Country> getTopNCountriesInWorld(int limit) {
+        // query to get all countries in the world
+        String query =
+                "SELECT Code, country.Name, Continent, Region, country.Population, city.Name AS 'Capital'"
+                        + "  FROM country LEFT JOIN city ON country.Capital = city.ID"
+                        + " ORDER BY Population DESC "
+                        + " LIMIT " + limit;
+        // execute the query
+        ArrayList<Country> allCountries= processCountryQuery(query);
+        return allCountries;
+    }
+
+    /**
      * Returns all countries in the continent specified, organised by the population from largest to smallest
      * @param continentName Name of the continent to extract
      * @return List of countries in the continent
@@ -145,11 +182,56 @@ public class App
         return countriesInContinent;
     }
 
+    /**
+     * Returns top N populated countries in the continent specified
+     * @param continentName continent to extract
+     * @param limit number of countries to extract
+     * @return  list of Country objects
+     */
+    public ArrayList<Country> getTopNCountriesInContinent(String continentName, int limit) {
+        String query = "SELECT Code, country.Name, Continent, Region, country.Population, city.Name AS 'Capital' " +
+                "FROM country LEFT JOIN city ON country.Capital = city.ID " +
+                "WHERE Continent = '" + continentName + "' " +
+                "ORDER BY Population DESC " +
+                "LIMIT " + limit;
+        ArrayList<Country> countriesInContinent = processCountryQuery(query);
+        if (countriesInContinent.isEmpty()) {
+            System.out.println("Invalid continent specified.");
+            return null;
+        }
+        return countriesInContinent;
+    }
+
+    /**
+     * Returns a list of all countries in the region specified
+     * @param regionName    region to extract
+     * @return  list of Country objects
+     */
     public ArrayList<Country> getAllCountriesInRegion(String regionName) {
         String query = "SELECT Code, country.Name, Continent, Region, country.Population, city.Name AS 'Capital' " +
                 "FROM country LEFT JOIN city ON country.Capital = city.ID " +
                 "WHERE Region = '" + regionName + "' " +
                 "ORDER BY Population DESC";
+        ArrayList<Country> countriesInRegion = processCountryQuery(query);
+        if (countriesInRegion.isEmpty()) {
+            System.out.println("Invalid region specified.");
+            return null;
+        }
+        return countriesInRegion;
+    }
+
+    /**
+     * Returns top N populated countries in the region specified
+     * @param regionName    region to extract
+     * @param limit     countries to extract
+     * @return  list of Country objects
+     */
+    public ArrayList<Country> getTopNCountriesInRegion(String regionName, int limit) {
+        String query = "SELECT Code, country.Name, Continent, Region, country.Population, city.Name AS 'Capital' " +
+                "FROM country LEFT JOIN city ON country.Capital = city.ID " +
+                "WHERE Region = '" + regionName + "' " +
+                "ORDER BY Population DESC " +
+                "LIMIT " + limit;
         ArrayList<Country> countriesInRegion = processCountryQuery(query);
         if (countriesInRegion.isEmpty()) {
             System.out.println("Invalid region specified.");
