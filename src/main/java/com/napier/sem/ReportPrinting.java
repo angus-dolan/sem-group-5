@@ -8,7 +8,7 @@ public class ReportPrinting {
      * @param countryList   countries to display
      */
     public static void displayCountries(ArrayList<Country> countryList) {
-        if (countryList == null) {
+        if (countryList == null || countryList.isEmpty()) {
             System.out.println("No countries to print");
         }
         else {
@@ -28,13 +28,13 @@ public class ReportPrinting {
     }
 
     public static void displayTopCountries(ArrayList<Country> countryList) {
-        if (countryList == null) {
+        if (countryList == null || countryList.isEmpty()) {
             System.out.println("No countries to print");
         }
         else {
             String h1 = "Code", h2 = "Name", h3 = "Continent", h4 = "Region", h5 = "Population", h6 = "Capital";
             // print a header
-            System.out.println(String.format("%-3s %-4s %-44s %-14s %-25s %-10s %-34s", "No", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+            System.out.println(String.format("%3s %-4s %-44s %-14s %-25s %-10s %-34s", "No", "Code", "Name", "Continent", "Region", "Population", "Capital"));
             // print details of all countries in the list
             int counter = 1;
             for (Country c : countryList) {

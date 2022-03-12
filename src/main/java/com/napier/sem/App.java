@@ -161,6 +161,9 @@ public class App
                         + " LIMIT " + limit;
         // execute the query
         ArrayList<Country> allCountries= processCountryQuery(query);
+        if(allCountries.size() < limit) {
+            System.out.println("***Not enough countries for this ranking. Returning all countries in the world***");
+        }
         return allCountries;
     }
 
@@ -199,6 +202,9 @@ public class App
             System.out.println("Invalid continent specified.");
             return null;
         }
+        if(countriesInContinent.size() < limit) {
+            System.out.println("***Not enough countries in continent for this ranking. Returning all in continent***");
+        }
         return countriesInContinent;
     }
 
@@ -236,6 +242,9 @@ public class App
         if (countriesInRegion.isEmpty()) {
             System.out.println("Invalid region specified.");
             return null;
+        }
+        if(countriesInRegion.size() < limit) {
+            System.out.println("***Not enough countries in region for this ranking. Returning all countries in region***");
         }
         return countriesInRegion;
     }
