@@ -35,6 +35,10 @@ class AppTest
         Country c = new Country();
         c.setCode("GBR");
         c.setName("United Kingdom");
+        c.setContinent("Europe");
+        c.setPopulation(59623400);
+        c.setCapital("London");
+        c.setRegion("British Islands");
         countries.add(c);
         displayCountries(countries);
     }
