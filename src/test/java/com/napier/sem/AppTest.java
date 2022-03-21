@@ -376,11 +376,13 @@ class AppTest {
         p.setCityPopulation(40000);
         p.setCityPopulationPercent(12);
         p.setName("Scottish");
+        p.setPopulation(2500);
         p.setNotCityPopulation(90000);
         p.setNonCityPopulationPercent(88);
         p.getCityPopulation();
         p.getCityPopulationPercent();
         p.getName();
+        p.getPopulation();
         p.getNotCityPopulation();
         p.getNonCityPopulationPercent();
         p.toString();
