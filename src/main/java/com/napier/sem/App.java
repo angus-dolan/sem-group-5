@@ -66,6 +66,62 @@ public class App
         System.out.println("Report of top " + n3 + " populated countries in " + region2);
         displayTopCountries(topNInRegion);
 
+
+
+
+        ArrayList<City> retrieved = new ArrayList<City>();
+        int limit = 10;
+       String continentName = "Africa";
+       String regionName = "Middle East";
+        String countryName = "France";
+        String districtName = "Île-de-France";
+
+        // Produce a report of all the cities in the world organised by largest population to smallest.
+     retrieved = a.getAllCitiesInWorld();
+        System.out.println("\nA report of all the cities in the world organised by largest population to smallest.");
+     displayCities(retrieved);
+
+
+        // Produce a report of all the cities in a continent organised by largest population to smallest.
+        retrieved = a.getAllCitiesInContinent(continentName);
+        System.out.println("\nA report of all the cities on the continent "+ continentName +" organised by largest population to smallest.");
+        displayCities(retrieved);
+        // Produce a report of all the cities in a region organised by largest population to smallest.
+        retrieved = a.getAllCitiesInRegion(regionName);
+        System.out.println("\nA report of all the cities in the region " + regionName+ " organised by largest population to smallest.");
+        displayCities(retrieved);
+        // Produce a report of all the cities in a country organised by largest population to smallest.
+        retrieved = a.getAllCitiesInCountry(countryName);
+        System.out.println("\nA report of all the cities in a country " + countryName+ " organised by largest population to smallest.");
+        displayCities(retrieved);
+        // Produce a report of all the cities in a district organised by largest population to smallest.
+        retrieved = a.getAllCitiesInDistrict(districtName);
+        System.out.println("\nA report of all the cities in the district  " + districtName + " organised by largest population to smallest. ");
+        displayCities(retrieved);
+       // Produce a report of the top N populated cities in the world where N is provided by the user.
+        retrieved = a.getNCitiesInWorld(limit);
+        System.out.println("\nA report of the top N populated cities in the world where N is provided by the user (" + limit + ")");
+        displayTopCities(retrieved);
+        // Produce a report of the top N populated cities in the continent where N is provided by the user.
+        retrieved = a.getNCitiesInContinent(limit, continentName);
+        System.out.println("\nA report of the top N populated cities on the continent " + continentName + " where N is provided by the user(" + limit + ")");
+        displayTopCities(retrieved);
+        // Produce a report of the top N populated cities in the region where N is provided by the user.
+
+        retrieved = a.getNCitiesInRegion(limit, regionName);
+        System.out.println("\nA report of the top N populated cities in the region "+regionName+" where N is provided by the user(" + limit + ")");
+        displayTopCities(retrieved);
+        // Produce a report of the top N populated cities in the country where N is provided by the user.
+
+        retrieved = a.getNCitiesInCountry(limit, countryName);
+        System.out.println("\nA report of the top N populated cities in the country "+countryName+" where N is provided by the user(" + limit + ")");
+        displayTopCities(retrieved);
+        // Produce a report of the top N populated cities in the district where N is provided by the user.
+
+        retrieved = a.getNCitiesInDistrict(limit, districtName);
+        System.out.println("\nA report of the top N populated cities in the district "+districtName+"where N is provided by the user (" + limit + ")");
+        displayTopCities(retrieved);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -285,4 +341,214 @@ public class App
             return null;
         }
     }
+
+    /**
+     * returns a list of cities in the world
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getAllCitiesInWorld(){
+      //  SELECT Name, CountryCode, District, Population FROM world.city ORDER BY  Population DESC ;
+        String query = "SELECT city.Name as 'City',  country.Name as 'Country', District, city.Population as 'Population'" +
+                        "FROM world.city join world.country on city.CountryCode = country.code " +
+                        "ORDER BY city.Population DESC ;";
+       ArrayList<City> cities = processCityQuery(query);
+        return cities;
+    }
+
+    /**
+     * returns a list of cities on a continent
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getAllCitiesInContinent(String continentName){
+        String query = "SELECT city.Name as 'City',  country.Name as 'Country', District, city.Population as 'Population' " +
+                       "FROM world.city join world.country on city.CountryCode = country.code " +
+                        "WHERE country.continent = '" + continentName +  "' " +
+                        "ORDER BY Population DESC;";
+        ArrayList<City> cities = processCityQuery(query);
+        return cities;
+    }
+    /**
+     * returns a list of cities in a region
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getAllCitiesInRegion(String regionName){
+        String query = "SELECT city.Name as 'City',  country.Name as 'Country', District, city.Population as 'Population' " +
+                        "FROM world.city join world.country on city.CountryCode = country.code " +
+                        "WHERE country.Region = '" + regionName +
+                        "' ORDER BY Population DESC;";
+        ArrayList<City> cities = processCityQuery(query);
+        return cities;
+    }
+    /**
+     * returns a list of cities in a country
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getAllCitiesInCountry(String countryName){
+        String query = "SELECT city.Name as 'City',  country.Name as 'Country', District, city.Population as 'Population' " +
+                       "FROM world.city join world.country on city.CountryCode = country.code " +
+                       "WHERE country.Name = '" +countryName+ "' " +
+                       "ORDER BY Population DESC;";
+        ArrayList<City> cities = processCityQuery(query);
+        return cities;
+    }
+    /**
+     * returns a list of cities in a district
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getAllCitiesInDistrict(String districtName){
+        String query = "SELECT city.Name as 'city',  country.Name as 'country', District, city.Population " +
+                        "FROM world.city join world.country on city.CountryCode = country.code " +
+                        "WHERE city.District = '" + districtName +
+                        "'ORDER BY city.Population DESC;";
+        ArrayList<City> cities = processCityQuery(query);
+        return cities;
+    }
+    /**
+     * returns a list of N cities on a continent
+     * @param   c number of cities to return
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getNCitiesInWorld(int c){
+        String query = "SELECT city.Name AS 'city', country.Name AS 'country', District, city.Population " +
+                       "FROM world.city join world.country on city.CountryCode = country.Code " +
+                       "ORDER BY city.Population DESC LIMIT " + c + ";" ;
+        ArrayList<City> cities = processCityQuery(query);
+        if (cities.isEmpty()) {
+            System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+            return null;
+        }
+        else if(cities.size() <  c) {
+            System.out.println("*** Not enough cities in the world for this ranking. Returning as many as there are in world ***");
+        }
+        return cities;
+    }
+    /**
+     * returns a list of N cities on a continent
+     * @param continent to search on
+     * @param c2 number of cities to return
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getNCitiesInContinent(int c2, String continent){
+        String query = "SELECT city.Name as 'city',  country.Name as 'country', District, city.Population " +
+                        "FROM world.city join world.country on city.CountryCode = country.code " +
+                        "WHERE country.continent = '" + continent + "' " +
+                        "ORDER BY city.Population DESC LIMIT " + c2 + ";";
+        ArrayList<City> cities = processCityQuery(query);
+        if (cities.isEmpty()) {
+            System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+            return null;
+        }
+        else if(cities.size() <  c2) {
+            System.out.println("*** Not enough cities on this continent for this ranking. Returning as many as there are on continent ***");
+        }
+        return cities;
+    }
+    /**
+     * returns a list of N cities on a continent
+     * @param  region to search on
+     * @param c3 number of cities to return
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getNCitiesInRegion(int c3, String region){
+        String query = "SELECT city.Name as 'city',  country.Name as 'country', District, city.Population " +
+                        "FROM world.city join world.country on city.CountryCode = country.code  " +
+                        "WHERE country.Region = '" + region + "' " +
+                        "ORDER BY city.Population DESC LIMIT " + c3 + ";";
+        ArrayList<City> cities = processCityQuery(query);
+        if (cities.isEmpty()) {
+            System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+            return null;
+        }
+        else if(cities.size() <  c3) {
+            System.out.println("*** Not enough cities in the region for this ranking. Returning as many as there are in region ***");
+        }
+
+        return cities;
+    }
+    /**
+     * returns a list of N cities on a continent
+     * @param  country to search through
+     * @param c4 number of cities to return
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getNCitiesInCountry(int c4, String country){
+        String query = "SELECT city.Name as 'city',  country.Name as 'country', District, city.Population " +
+                        "FROM world.city join world.country on city.CountryCode = country.code " +
+                        "WHERE country.Name = '" + country + "' " +
+                        " ORDER BY city.Population DESC LIMIT " + c4 + ";";
+        ArrayList<City> cities = processCityQuery(query);
+        if (cities.isEmpty()) {
+            System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+            return null;
+        }
+        else if(cities.size() <  c4) {
+            System.out.println("*** Not enough cities in the country for this ranking. Returning as many as there are in country ***");
+        }
+        return cities;
+    }
+    /**
+     * returns a list of N cities on a continent
+     * @param  district to search through
+     * @param  c5 number of cities to return
+     * @return a list of cities objects
+     */
+    public ArrayList<City> getNCitiesInDistrict(int c5, String district){
+        String query = "SELECT city.Name as 'city',  country.Name as 'country', District, city.Population " +
+                       "FROM world.city join world.country on city.CountryCode = country.Code " +
+                       "WHERE city.District = '" + district +
+                       "' ORDER BY Population DESC LIMIT " + c5 + ";";
+        ArrayList<City> cities = new ArrayList<City>();
+       cities = processCityQuery(query);
+        if (cities.isEmpty() ) {
+            System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+            return null;
+        }
+        else if(cities.size() <  c5) {
+            System.out.println("*** Not enough cities in the district for this ranking. Returning as many as there are in district ***");
+        }
+       // return countriesInContinent;
+        return cities;
+    }
+
+    /**
+     * Processes an SQL query to get a list of cities
+     * @param query Query to process
+     * @return  a list of City objects
+     */
+
+    public ArrayList<City> processCityQuery(String query) {
+        ArrayList<City> cities = new ArrayList<City>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(query);
+
+            //Extract country information
+            // while there are new rows in the result set, keep creating new city objects
+            while (rset.next())
+            {
+
+                City c = new City();
+
+                c.setCountry(rset.getString("Country"));
+                c.setName(rset.getString("City"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(Integer.parseInt(rset.getString("Population")));
+
+            //add object to list
+                cities.add(c);
+            }
+            // when no more rows, return list
+            return cities;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city data");
+            return null;
+        }
+    }
+
+
 }

@@ -48,4 +48,45 @@ public class ReportPrinting {
             }
         }
     }
+    public static void displayCities(ArrayList<City> cityList) {
+        if (cityList == null || cityList.isEmpty()) {
+            System.out.println("No cities to print");
+        }
+        else {
+            String h1 = "Name",  h2 = "Country", h3 = "District", h4 = "Population";
+            // print a header
+            System.out.println(String.format("%-25s   %-50s   %-47s   %-25s" , "Name", "Country", "District", "Population"));
+            // print details of all countries in the list
+            for (City c : cityList) {
+                if(c == null) {
+                    continue;
+                }
+                String city = String.format("%-25s   %-50s   %-47s   %-25d",
+                        c.getName(), c.getCountry(), c.getDistrict(),c.getPopulation());
+                System.out.println(city);
+            }
+        }
+    }
+    public static void displayTopCities(ArrayList<City> cityList) {
+        int counter = 1;
+        if (cityList == null || cityList.isEmpty()) {
+            System.out.println("No cities to print");
+        }
+        else {
+            String h1 = "Name",  h2 = "Country", h3 = "District", h4 = "Population";
+            // print a header
+            System.out.println(String.format("%3s. %-20s   %-50s   %-47s   %-25s" , "No","Name", "Country", "District", "Population"));
+            // print details of all countries in the list
+            for (City c : cityList) {
+                if(c == null) {
+                    continue;
+                }
+
+                String city = String.format("%2d. %-20s   %-50s   %-47s   %-25d", counter,
+                        c.getName(), c.getCountry(), c.getDistrict(),c.getPopulation());
+                System.out.println(city);
+                counter ++;
+            }
+        }
+    }
 }

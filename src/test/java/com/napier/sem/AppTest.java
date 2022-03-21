@@ -10,6 +10,8 @@ import static com.napier.sem.ReportPrinting.*;
 class AppTest
 {
     ArrayList<Country> countries;
+    ArrayList<City> cities;
+
 
     @Test
     void displayCountriesTestNull() {
@@ -70,5 +72,64 @@ class AppTest
         countries.add(c);
         displayTopCountries(countries);
     }
+
+    @Test
+    void displayCitiesTestNullSet() {
+
+        displayCountries(null);
+    }
+
+    @Test
+    void displayCitiesTestEmptySet() {
+        cities = new ArrayList<>();
+        displayCities(cities);
+    }
+
+    @Test
+    void displayCitiesTestSetContainsNull() {
+        cities = new ArrayList<>();
+        cities.add(null);
+        displayCities(cities);
+    }
+
+    @Test
+    void displayCitiesTestStandard() {
+        cities = new ArrayList<>();
+        City city = new City();
+        city.setCountry("France");
+        city.setName("Paris");
+        city.setPopulation(90);
+        city.setDistrict("Île-de-France");
+        cities.add(city);
+        displayCities(cities);
+    }
+
+    @Test
+    void displayTopCitiesTestContainsNull() {
+        cities = new ArrayList<City>();
+        cities.add(null);
+        displayTopCountries(countries);
+    }
+    @Test
+    void displayTopCitiesTestStandard() {
+        cities = new ArrayList<>();
+        City city = new City();
+        city.setName("Paris");
+        city.setPopulation(400);
+        city.setDistrict("Île-de-France");
+        city.setCountry("France");
+        cities.add(city);
+        displayTopCountries(countries);
+    }
+    @Test
+    void displayTopCitiesTestEmptySet() {
+        cities = new ArrayList<>();
+        displayTopCities(cities);
+    }
+    @Test
+    void displayTopCitiesTestNull() {
+        displayTopCountries(null);
+    }
+
 
 }
