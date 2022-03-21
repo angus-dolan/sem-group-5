@@ -11,8 +11,7 @@ class AppTest {
 
     ArrayList < Country > countries;
     ArrayList < City > cities;
-
-
+    App a = new App();
 
     @Test
     void displayCountriesTestNull() {
@@ -158,9 +157,178 @@ class AppTest {
     }
     @Test
     void DisplayPopulationsEmptySet() {
-       countries = new ArrayList<>();
+        countries = new ArrayList<>();
         displayTopCountries(countries);
     }
+    @Test
+    void getAllCitiesInContinentTestFalse() {
+        cities = new ArrayList<>();
+        String continent = "Boop";
+        cities = a.getAllCitiesInContinent(continent);
+    }
+    @Test
+    void getAllCitiesInContinentTestTrue() {
+        cities = new ArrayList<>();
+        String continent = "Africa";
+        cities = a.getAllCitiesInContinent(continent);
+    }
+    @Test
+    void getAllCitiesInDistrictTestFalse() {
+        cities = new ArrayList<>();
+        String district = "Boop";
+        cities = a.getAllCitiesInDistrict(district);
+    }
+    @Test
+    void getAllCitiesInDistrictTestTrue() {
+        cities = new ArrayList<>();
+        String district = "Bretagne";
+        cities = a.getAllCitiesInDistrict(district);
+    }
+    @Test
+    void getAllCitiesInCountryTestFalse() {
+        cities = new ArrayList<>();
+        String country = "Boop";
+        cities = a.getAllCitiesInCountry(country);
+    }
+    @Test
+    void getAllCitiesInCountryTestTrue() {
+        cities = new ArrayList<>();
+        String country = "France";
+        cities = a.getAllCitiesInCountry(country);
+    }
+    @Test
+    void getAllCitiesInRegionTestFalse() {
+        cities = new ArrayList<>();
+        String region = "Boop";
+        cities = a.getAllCitiesInRegion(region);
+    }
+    @Test
+    void getAllCitiesInRegionTestTrue() {
+        cities = new ArrayList<>();
+        String region = "Middle East";
+        cities = a.getAllCitiesInRegion(region);
+    }
+    @Test
+    void getAllCitiesInWorldTestTrue() {
+        cities = new ArrayList<>();
+        cities = a.getAllCitiesInWorld();
+    }
+
+    @Test
+    void topNCitiesInWorldBigNumber(){
+        cities = new ArrayList<>();
+        int pass = 70000000;
+        cities = a.getNCitiesInWorld(pass);
+        // assertEquals(cities, null);
+
+    }
+    @Test
+    void topNCitiesInWorldSmallNumber(){
+        cities = new ArrayList<>();
+        int pass = -70000000;
+        cities = a.getNCitiesInWorld(pass);
+
+
+    }
+    @Test
+    void topNCitiesInWorldNull(){
+        cities = new ArrayList<>();
+        int pass = 0;
+        cities =  a.getNCitiesInWorld(pass);
+
+    }
+    @Test
+    void topNCitiesInWorldNormal(){
+        cities = new ArrayList<>();
+        int pass = 5;
+        cities = a.getNCitiesInWorld(pass);
+
+    }
+    @Test
+    void topNCitiesInDistrictBigNumber(){
+        cities = new ArrayList<>();
+        int pass = 70000000;
+        cities =  a.getNCitiesInDistrict(pass, "");
+
+    }
+    @Test
+    void topNCitiesInDistrictSmallNumber(){
+        cities = new ArrayList<>();
+        int pass = -70000000;
+        cities = a.getNCitiesInDistrict(pass, "");
+
+    }
+    @Test
+    void topNCitiesInDistrictNull(){
+        cities = new ArrayList<>();
+        int pass = 0;
+        cities = a.getNCitiesInDistrict(pass, "");
+
+    }
+    @Test
+    void topNCitiesInDistrictNormal(){
+        cities = new ArrayList<>();
+        int pass = 5;
+        cities = a.getNCitiesInDistrict(pass, "");
+
+    }
+    @Test
+    void topNCitiesInRegionBigNumber(){
+        cities = new ArrayList<>();
+        int pass = 70000000;
+        cities =  a.getNCitiesInRegion(pass, "");
+
+    }
+    @Test
+    void topNCitiesInRegionSmallNumber(){
+        cities = new ArrayList<>();
+        int pass = -70000000;
+        cities = a.getNCitiesInRegion(pass, "");
+
+    }
+    @Test
+    void topNCitiesInRegionNull(){
+        cities = new ArrayList<>();
+        int pass = 0;
+        cities = a.getNCitiesInRegion(pass, "");
+
+    }
+    @Test
+    void topNCitiesInRegionNormal(){
+        cities = new ArrayList<>();
+        int pass = 5;
+        cities = a.getNCitiesInRegion(pass, "");
+
+    }
+    @Test
+    void topNCitiesInCountryBigNumber(){
+        cities = new ArrayList<>();
+        int pass = 70000000;
+        cities = a.getNCitiesInCountry(pass, "");
+
+    }
+    @Test
+    void topNCitiesInCountrySmallNumber(){
+        cities = new ArrayList<>();
+        int pass = -70000000;
+        cities = a.getNCitiesInCountry(pass, "");
+
+    }
+    @Test
+    void topNCitiesInCountryNull(){
+        cities = new ArrayList<>();
+        int pass = 0;
+        cities = a.getNCitiesInCountry(pass, "");
+
+    }
+    @Test
+    void topNCitiesInCountryNormal(){
+        cities = new ArrayList<>();
+        int pass = 5;
+        cities = a.getNCitiesInCountry(pass, "");
+
+    }
+
 
 
 }
