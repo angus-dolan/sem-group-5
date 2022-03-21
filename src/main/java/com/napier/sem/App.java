@@ -28,6 +28,36 @@ public class App {
         // Connect to database
         a.connect();
 
+        // Use case 2
+        ArrayList <CapitalCity> useCase2 = a.useCase2("Africa");
+        System.out.println("Report on all the capital cities in a continent organised by largest population to smallest.");
+        displayCapitalCities(useCase2);
+
+        // Use case 18
+        ArrayList <CapitalCity> useCase18 = a.useCase18();
+        System.out.println("Report on all the capital cities in the world organised by largest population to smallest");
+        displayCapitalCities(useCase18);
+
+        // Use case 20
+        ArrayList <CapitalCity> useCase20 = a.useCase20("Southern Europe", 5);
+        System.out.println("Report on the top N populated capital cities in a region");
+        displayCapitalCities(useCase20);
+
+        // Use case 21
+        ArrayList <CapitalCity> useCase21 = a.useCase21("Caribbean");
+        System.out.println("Report on the capital cities in a region organised by largest to smallest");
+        displayCapitalCities(useCase21);
+
+        // Use case 22
+        ArrayList <CapitalCity> useCase22 = a.useCase22(5);
+        System.out.println("Report on the top N populated capital cities in the world");
+        displayCapitalCities(useCase22);
+
+        // Use case 23
+        ArrayList <CapitalCity> useCase23 = a.useCase23("Asia", 5);
+        System.out.println("Report on top N populated capital cities in a continent");
+        displayCapitalCities(useCase23);
+
         // Produce a report of all countries in the world organised by largest population to smallest
         ArrayList < Country > allCountries = a.getAllCountriesInWorld();
         System.out.println("Report on all the countries in the world organised by largest population to smallest.");
@@ -120,7 +150,7 @@ public class App {
         retrieved = a.getNCitiesInDistrict(limit, districtName);
         System.out.println("\nA report of the top N populated cities in the district " + districtName + "where N is provided by the user (" + limit + ")");
         displayTopCities(retrieved);
-        
+
         // Call population by country
         ArrayList<Population> allPopulationsCountry = new ArrayList<>();
         allPopulationsCountry = a.getPopulationinCitybyCountry();
@@ -186,6 +216,114 @@ public class App {
             } catch (Exception e) {
                 System.out.println("Error closing connection to database");
             }
+        }
+    }
+
+    /**
+     * Returns all the capital cities in a continent organised by largest population to smallest
+     * @return  list of CapitalCity objects
+     */
+    public ArrayList <CapitalCity> useCase2(String continent) {
+        // Prepare SQL query as string
+        String query = "SELECT * FROM city JOIN country ON country.Capital = city.id WHERE country.Continent = '" + continent + "' ORDER BY city.Population DESC;";
+        // Execute query
+        ArrayList <CapitalCity> res = processCapitalCityQuery(query);
+
+        return res;
+    }
+    /**
+     * Returns all the capital cities in the world organised by largest population to smallest
+     * @return  list of CapitalCity objects
+     */
+    public ArrayList <CapitalCity> useCase18() {
+        // Prepare SQL query as string
+        String query = "SELECT * FROM city JOIN country ON country.Capital = city.id ORDER BY city.Population DESC;";
+        // Execute query
+        ArrayList <CapitalCity> res = processCapitalCityQuery(query);
+
+        return res;
+    }
+    /**
+     * Returns the top N populated capital cities in a region where N is provided by the user
+     * @return  list of CapitalCity objects
+     */
+    public ArrayList <CapitalCity> useCase20(String region, int limit) {
+        // Prepare SQL query as string
+        String query = "SELECT * FROM city JOIN country ON country.Capital = city.id WHERE country.Region = '" + region + "' ORDER BY city.Population DESC LIMIT " + limit;
+        // Execute query
+        ArrayList <CapitalCity> res = processCapitalCityQuery(query);
+
+        return res;
+    }
+    /**
+     * Returns all the capital cities in a region organised by largest to smallest
+     * @return  list of CapitalCity objects
+     */
+    public ArrayList <CapitalCity> useCase21(String region) {
+        // Prepare SQL query as string
+        String query = "SELECT * FROM city JOIN country ON country.Capital = city.id WHERE country.Region = '" + region + "' ORDER BY city.Population DESC;";
+        // Execute query
+        ArrayList <CapitalCity> res = processCapitalCityQuery(query);
+
+        return res;
+    }
+    /**
+     * Returns the top N populated capital cities
+     * @return  list of CapitalCity objects
+     */
+    public ArrayList <CapitalCity> useCase22(int limit) {
+        // Prepare SQL query as string
+        String query = "SELECT * FROM city JOIN country ON country.Capital = city.id ORDER BY city.Population DESC LIMIT " + limit;
+        // Execute query
+        ArrayList <CapitalCity> res = processCapitalCityQuery(query);
+
+        return res;
+    }
+    /**
+     * Returns the top N populated capital cities in a continent
+     * @return  list of CapitalCity objects
+     */
+    public ArrayList <CapitalCity> useCase23(String continent, int limit) {
+        // Prepare SQL query as string
+        String query = "SELECT * FROM city JOIN country ON country.Capital = city.id WHERE country.Continent = '" + continent + "' ORDER BY city.Population DESC LIMIT " + limit;
+        // Execute query
+        ArrayList <CapitalCity> res = processCapitalCityQuery(query);
+
+        return res;
+    }
+    /**
+     * Processes an SQL query to get a list of capital cities
+     * @param query Query to process
+     * @return  arraylist of capital cities
+     */
+    public ArrayList <CapitalCity> processCapitalCityQuery(String query) {
+        ArrayList <CapitalCity> cities = new ArrayList <CapitalCity> ();
+
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(query);
+
+            //Extract country information
+            // while there are new rows in the result set, keep creating new country objects
+            while (rset.next()) {
+                CapitalCity c = new CapitalCity();
+
+                c.setID(rset.getString("ID"));
+                c.setName(rset.getString("Name"));
+                c.setCountryCode(rset.getString("CountryCode"));
+                c.setDistrict(rset.getString("District"));
+                c.setPopulation(rset.getString("Population"));
+
+                cities.add(c);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city data");
+            return null;
         }
     }
 

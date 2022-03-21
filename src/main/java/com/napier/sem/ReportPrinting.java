@@ -3,6 +3,29 @@ package com.napier.sem;
 import java.util.ArrayList;
 
 public class ReportPrinting {
+
+    /**
+     * Displays a list of capital cities
+     * @param cityList   capital cities to display
+     */
+    public static void displayCapitalCities(ArrayList <CapitalCity> cityList) {
+        if (cityList == null || cityList.isEmpty()) {
+            System.out.println("No cities to print");
+        } else {
+            String h1 = "Name", h2 = "Population";
+            // print a header
+            System.out.println(String.format("%-25s %-25s", "Name", "Population"));
+            // print details of all countries in the list
+            for (CapitalCity c: cityList) {
+                if (c == null) {
+                    continue;
+                }
+                String country = String.format("%-25s %-25s ", c.getName(), c.getPopulation());
+                System.out.println(country);
+            }
+        }
+    }
+
     /**
      * Displays a list of countries
      * @param countryList   countries to display
