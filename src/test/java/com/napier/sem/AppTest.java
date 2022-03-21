@@ -8,8 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static com.napier.sem.ReportPrinting.*;
 
 class AppTest {
+
     ArrayList < Country > countries;
     ArrayList < City > cities;
+
 
 
     @Test
@@ -128,6 +130,36 @@ class AppTest {
     @Test
     void displayTopCitiesTestNull() {
         displayTopCountries(null);
+    }
+
+    @Test
+    void DisplayPopulationsTestNullEntry() {
+        countries = new ArrayList<>();
+        countries.add(null);
+        displayTopCountries(countries);
+    }
+
+    @Test
+    void DisplayPopulationsTestNull() {
+        displayTopCountries(null);
+    }
+    @Test
+    void DisplayPopulationsSimple() {
+        countries = new ArrayList<>();
+        Country c = new Country();
+        c.setCapital("Paris");
+        c.setPopulation(500);
+        c.setCode("Fra");
+        c.setRegion("Paris Region");
+        c.setContinent("Europe");
+        c.setName("France");
+        countries.add(c);
+        displayTopCountries(countries);
+    }
+    @Test
+    void DisplayPopulationsEmptySet() {
+       countries = new ArrayList<>();
+        displayTopCountries(countries);
     }
 
 

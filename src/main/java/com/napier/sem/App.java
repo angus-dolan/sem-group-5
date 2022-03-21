@@ -596,12 +596,17 @@ public class App {
     //Display populations
     public static void DisplayPopulations(ArrayList<Population> populations, String typeOfQuery){
         System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",  typeOfQuery , "Population", "City Population", "City Population %", "Non City Population", "Non City Population %"));
-
-        for(Population population : populations){
-            System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",
-                    population.getName(), population.getPopulation(), population.getCityPopulation(), population.getCityPopulationPercent(), population.getNotCityPopulation(), population.getNonCityPopulationPercent()));
-
+        if (populations.isEmpty() || populations.contains(null) || populations == null){
+            System.out.println("*** No populations retrieved ***");
         }
+        else {
+            for (Population population : populations) {
+                System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",
+                        population.getName(), population.getPopulation(), population.getCityPopulation(), population.getCityPopulationPercent(), population.getNotCityPopulation(), population.getNonCityPopulationPercent()));
+
+            }
+        }
+
     }
 
     public ArrayList<Population> getPopulationinCitybyCountry(Connection con) {
