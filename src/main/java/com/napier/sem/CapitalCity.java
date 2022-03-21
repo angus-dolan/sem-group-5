@@ -26,15 +26,4 @@ public class CapitalCity {
     public String getPopulation() {return Population;}
 
     public void setPopulation(String Population) {this.Population = Population;}
-
-    @Override
-    public String toString() {
-        return "City{" +
-                "ID='" + ID + '\'' +
-                ", Name='" + Name + '\'' +
-                ", CountryCode='" + CountryCode + '\'' +
-                ", District='" + District + '\'' +
-                ", Population='" + Population + '\'' +
-                '}';
-    }
 }
