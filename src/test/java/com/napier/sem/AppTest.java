@@ -370,6 +370,7 @@ class AppTest {
     public void getTestPopulationinCitybyRegion(){
         a.getPopulationinCitybyRegion();
     }
+
     @Test
     public void testPopulationConstructor(){
         PopulationClass.Population p = new PopulationClass.Population();
