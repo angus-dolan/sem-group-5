@@ -411,15 +411,22 @@ public class App {
         String query = "SELECT city.Name AS 'city', country.Name AS 'country', District, city.Population " +
                 "FROM world.city join world.country on city.CountryCode = country.Code " +
                 "ORDER BY city.Population DESC LIMIT " + c + ";";
-        ArrayList < City > cities = processCityQuery(query);
-        if (cities.isEmpty()) {
+        ArrayList<City> cityList = new ArrayList<City>();
+        cityList = processCityQuery(query);
+        if (cityList == null) {
             System.out.println("*** Amount specified was set to 0, or else nothing found ***");
-            return null;
-        } else if (cities.size() < c) {
-            System.out.println("*** Not enough cities in the world for this ranking. Returning as many as there are in world ***");
+            return cityList;
         }
-        return cities;
+        else if (cityList.isEmpty()) {
+                System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+                return cityList;
+            } else if (cityList.size() < c) {
+                System.out.println("*** Not enough cities in the world for this ranking. Returning as many as there are in world ***");
+            }
+
+        return cityList;
     }
+
     /**
      * returns a list of N cities on a continent
      * @param continent to search on
@@ -431,14 +438,20 @@ public class App {
                 "FROM world.city join world.country on city.CountryCode = country.code " +
                 "WHERE country.continent = '" + continent + "' " +
                 "ORDER BY city.Population DESC LIMIT " + c2 + ";";
-        ArrayList < City > cities = processCityQuery(query);
-        if (cities.isEmpty()) {
+        ArrayList<City> cityList = new ArrayList<City>();
+        cityList = processCityQuery(query);
+        if (cityList == null) {
             System.out.println("*** Amount specified was set to 0, or else nothing found ***");
-            return null;
-        } else if (cities.size() < c2) {
-            System.out.println("*** Not enough cities on this continent for this ranking. Returning as many as there are on continent ***");
+            return cityList;
         }
-        return cities;
+        else if (cityList.isEmpty()) {
+            System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+            return cityList;
+        } else if (cityList.size() < c2) {
+            System.out.println("*** Not enough cities in the world for this ranking. Returning as many as there are in world ***");
+        }
+
+        return cityList;
     }
     /**
      * returns a list of N cities on a continent
@@ -451,15 +464,20 @@ public class App {
                 "FROM world.city join world.country on city.CountryCode = country.code  " +
                 "WHERE country.Region = '" + region + "' " +
                 "ORDER BY city.Population DESC LIMIT " + c3 + ";";
-        ArrayList < City > cities = processCityQuery(query);
-        if (cities.isEmpty()) {
+        ArrayList<City> cityList = new ArrayList<City>();
+        cityList = processCityQuery(query);
+        if (cityList == null) {
             System.out.println("*** Amount specified was set to 0, or else nothing found ***");
-            return null;
-        } else if (cities.size() < c3) {
-            System.out.println("*** Not enough cities in the region for this ranking. Returning as many as there are in region ***");
+            return cityList;
+        }
+        else if (cityList.isEmpty()) {
+            System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+            return cityList;
+        } else if (cityList.size() < c3) {
+            System.out.println("*** Not enough cities in the world for this ranking. Returning as many as there are in world ***");
         }
 
-        return cities;
+        return cityList;
     }
     /**
      * returns a list of N cities on a continent
@@ -472,14 +490,20 @@ public class App {
                 "FROM world.city join world.country on city.CountryCode = country.code " +
                 "WHERE country.Name = '" + country + "' " +
                 " ORDER BY city.Population DESC LIMIT " + c4 + ";";
-        ArrayList < City > cities = processCityQuery(query);
-        if (cities.isEmpty()) {
+        ArrayList<City> cityList = new ArrayList<City>();
+        cityList = processCityQuery(query);
+        if (cityList == null) {
             System.out.println("*** Amount specified was set to 0, or else nothing found ***");
-            return null;
-        } else if (cities.size() < c4) {
-            System.out.println("*** Not enough cities in the country for this ranking. Returning as many as there are in country ***");
+            return cityList;
         }
-        return cities;
+        else if (cityList.isEmpty()) {
+            System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+            return cityList;
+        } else if (cityList.size() < c4) {
+            System.out.println("*** Not enough cities in the world for this ranking. Returning as many as there are in world ***");
+        }
+
+        return cityList;
     }
     /**
      * returns a list of N cities on a continent
@@ -492,16 +516,20 @@ public class App {
                 "FROM world.city join world.country on city.CountryCode = country.Code " +
                 "WHERE city.District = '" + district +
                 "' ORDER BY Population DESC LIMIT " + c5 + ";";
-        ArrayList < City > cities = new ArrayList < City > ();
-        cities = processCityQuery(query);
-        if (cities.isEmpty()) {
+        ArrayList<City> cityList = new ArrayList<City>();
+        cityList = processCityQuery(query);
+        if (cityList == null) {
             System.out.println("*** Amount specified was set to 0, or else nothing found ***");
-            return null;
-        } else if (cities.size() < c5) {
-            System.out.println("*** Not enough cities in the district for this ranking. Returning as many as there are in district ***");
+            return cityList;
         }
-        // return countriesInContinent;
-        return cities;
+        else if (cityList.isEmpty()) {
+            System.out.println("*** Amount specified was set to 0, or else nothing found ***");
+            return cityList;
+        } else if (cityList.size() < c5) {
+            System.out.println("*** Not enough cities in the world for this ranking. Returning as many as there are in world ***");
+        }
+
+        return cityList;
     }
 
     /**
