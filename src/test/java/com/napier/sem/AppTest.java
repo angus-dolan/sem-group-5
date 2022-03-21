@@ -2,36 +2,33 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.*;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static com.napier.sem.ReportPrinting.*;
 
 class AppTest {
 
     ArrayList < Country > countries;
+    ArrayList<Population> populations;
     ArrayList < City > cities;
     App a = new App();
 
+    // *** displayCountries ***
     @Test
     void displayCountriesTestNull() {
         displayCountries(null);
     }
-
     @Test
     void displayCountriesTestEmpty() {
         countries = new ArrayList < > ();
         displayCountries(countries);
     }
-
     @Test
     void displayCountriesContainsNull() {
         countries = new ArrayList < > ();
         countries.add(null);
         displayCountries(countries);
     }
-
     @Test
     void displayCountriesBasic() {
         countries = new ArrayList < > ();
@@ -46,24 +43,22 @@ class AppTest {
         displayCountries(countries);
     }
 
+    // *** displayTopCountries ***
     @Test
     void displayTopCountriesTestNull() {
         displayTopCountries(null);
     }
-
     @Test
     void displayTopCountriesTestEmpty() {
         countries = new ArrayList < > ();
         displayTopCountries(countries);
     }
-
     @Test
     void displayTopCountriesContainsNull() {
         countries = new ArrayList < > ();
         countries.add(null);
         displayTopCountries(countries);
     }
-
     @Test
     void displayTopCountriesBasic() {
         countries = new ArrayList < > ();
@@ -74,25 +69,23 @@ class AppTest {
         displayTopCountries(countries);
     }
 
+    // *** displayCities ***
     @Test
     void displayCitiesTestNullSet() {
 
         displayCountries(null);
     }
-
     @Test
     void displayCitiesTestEmptySet() {
         cities = new ArrayList < > ();
         displayCities(cities);
     }
-
     @Test
     void displayCitiesTestSetContainsNull() {
         cities = new ArrayList < > ();
         cities.add(null);
         displayCities(cities);
     }
-
     @Test
     void displayCitiesTestStandard() {
         cities = new ArrayList < > ();
@@ -105,11 +98,12 @@ class AppTest {
         displayCities(cities);
     }
 
+    // *** displayTopCities ***
     @Test
     void displayTopCitiesTestContainsNull() {
         cities = new ArrayList < City > ();
         cities.add(null);
-        displayTopCountries(countries);
+        displayTopCities(cities);
     }
     @Test
     void displayTopCitiesTestStandard() {
@@ -120,7 +114,7 @@ class AppTest {
         city.setDistrict("Île-de-France");
         city.setCountry("France");
         cities.add(city);
-        displayTopCountries(countries);
+        displayTopCities(cities);
     }
     @Test
     void displayTopCitiesTestEmptySet() {
@@ -131,36 +125,37 @@ class AppTest {
     void displayTopCitiesTestNull() {
         displayTopCountries(null);
     }
-
+    // *** displayPopulations ***
     @Test
-    void DisplayPopulationsTestNullEntry() {
-        countries = new ArrayList<>();
-        countries.add(null);
-        displayTopCountries(countries);
-    }
-
-    @Test
-    void DisplayPopulationsTestNull() {
-        displayTopCountries(null);
+    void testDisplayPopulationsTestNullEntry() {
+        populations = new ArrayList<>();
+        populations.add(null);
+        displayPopulations(populations, "Country");
     }
     @Test
-    void DisplayPopulationsSimple() {
-        countries = new ArrayList<>();
-        Country c = new Country();
-        c.setCapital("Paris");
-        c.setPopulation(500);
-        c.setCode("Fra");
-        c.setRegion("Paris Region");
-        c.setContinent("Europe");
-        c.setName("France");
-        countries.add(c);
-        displayTopCountries(countries);
+    void testDisplayPopulationsTestBothNull() {
+        displayPopulations(null, null);
+    }
+    @Test
+    void testDisplayPopulationsSimple() {
+        populations = new ArrayList<>();
+        Population p = new Population();
+        p.setPopulation(130000);
+        p.setCityPopulation(40000);
+        p.setCityPopulationPercent(12);
+        p.setName("Scottish");
+        p.setNotCityPopulation(90000);
+        p.setNonCityPopulationPercent(88);
+        populations.add(p);
+        displayPopulations(populations, "Country");
     }
     @Test
     void DisplayPopulationsEmptySet() {
-       countries = new ArrayList<>();
-        displayTopCountries(countries);
+        populations = new ArrayList<>();
+        displayPopulations(populations, "Country");
     }
+
+    // *** City reports ***
     @Test
     void getAllCitiesInContinentTestFalse() {
         cities = new ArrayList<>();
@@ -215,165 +210,161 @@ class AppTest {
         cities = a.getAllCitiesInWorld();
     }
 
+    // *** Top cities reports ***
     @Test
     void topNCitiesInWorldBigNumber(){
         cities = new ArrayList<>();
         int pass = 70000000;
         cities = a.getNCitiesInWorld(pass);
-       // assertEquals(cities, null);
-
     }
     @Test
     void topNCitiesInWorldSmallNumber(){
         cities = new ArrayList<>();
         int pass = -70000000;
         cities = a.getNCitiesInWorld(pass);
-
-
     }
     @Test
     void topNCitiesInWorldNull(){
         cities = new ArrayList<>();
         int pass = 0;
         cities =  a.getNCitiesInWorld(pass);
-
     }
     @Test
     void topNCitiesInWorldNormal(){
         cities = new ArrayList<>();
         int pass = 5;
         cities = a.getNCitiesInWorld(pass);
-
     }
     @Test
     void topNCitiesInDistrictBigNumber(){
         cities = new ArrayList<>();
         int pass = 70000000;
         cities =  a.getNCitiesInDistrict(pass, "");
-
     }
     @Test
     void topNCitiesInDistrictSmallNumber(){
         cities = new ArrayList<>();
         int pass = -70000000;
         cities = a.getNCitiesInDistrict(pass, "");
-
     }
     @Test
     void topNCitiesInDistrictNull(){
         cities = new ArrayList<>();
         int pass = 0;
         cities = a.getNCitiesInDistrict(pass, "");
-
     }
     @Test
     void topNCitiesInDistrictNormal(){
         cities = new ArrayList<>();
         int pass = 5;
         cities = a.getNCitiesInDistrict(pass, "");
-
     }
     @Test
     void topNCitiesInRegionBigNumber(){
         cities = new ArrayList<>();
         int pass = 70000000;
         cities =  a.getNCitiesInRegion(pass, "");
-
     }
     @Test
     void topNCitiesInRegionSmallNumber(){
         cities = new ArrayList<>();
         int pass = -70000000;
         cities = a.getNCitiesInRegion(pass, "");
-
     }
     @Test
     void topNCitiesInRegionNull(){
         cities = new ArrayList<>();
         int pass = 0;
         cities = a.getNCitiesInRegion(pass, "");
-
     }
     @Test
     void topNCitiesInRegionNormal(){
         cities = new ArrayList<>();
         int pass = 5;
         cities = a.getNCitiesInRegion(pass, "");
-
     }
     @Test
     void topNCitiesInCountryBigNumber(){
         cities = new ArrayList<>();
         int pass = 70000000;
         cities = a.getNCitiesInCountry(pass, "");
-
     }
     @Test
     void topNCitiesInCountrySmallNumber(){
         cities = new ArrayList<>();
         int pass = -70000000;
         cities = a.getNCitiesInCountry(pass, "");
-
     }
     @Test
     void topNCitiesInCountryNull(){
         cities = new ArrayList<>();
         int pass = 0;
         cities = a.getNCitiesInCountry(pass, "");
-
     }
     @Test
     void topNCitiesInCountryNormal(){
         cities = new ArrayList<>();
         int pass = 5;
         cities = a.getNCitiesInCountry(pass, "France");
+    }
 
+    // *** language tests ***
+    @Test
+    void testLanguage(){
+        a.getLanguage();
     }
     @Test
-    public void testLanguage(){
-        ResultSet r = a.getLanguage();
+    void testDisplayLanguageNull(){
+        displayLanguage(null);
     }
     @Test
-    public void testDisplayLanguageNull(){
-         a.displayLanguage(null);
-    }
-    @Test
-    public void testDisplayLanguageEmpty(){
+    void testDisplayLanguageEmpty(){
         ArrayList languages = new ArrayList();
-        a.displayLanguage(languages);
+        displayLanguage(languages);
     }
     @Test
-    public void testDisplayLanguageNormal(){
+    void testDisplayLanguageNormal(){
         ArrayList <Language> languages = new ArrayList();
         Language l = new Language(900000, "Arabic", 17);
 
         languages.add(l);
-        a.displayLanguage(languages);
+        displayLanguage(languages);
     }
     @Test
-    public void testDisplayLanguageNullEntry(){
+    void testDisplayLanguageNullEntry(){
         ArrayList <Language> languages = new ArrayList();
         languages.add(null);
-        a.displayLanguage(languages);
-    }
-    @Test
-    public void getTestPopulationinCitybyContinent(){
-        a.getPopulationinCitybyContinent();
+        displayLanguage(languages);
     }
 
+    // *** Population reports ***
     @Test
-    public void getTestPopulationinCitybyCountry(){
-        a.getPopulationinCitybyCountry();
+    void getTestPopulationInCityByContinent(){
+        a.getPopulationInCityByContinent();
     }
-
     @Test
-    public void getTestPopulationinCitybyRegion(){
-        a.getPopulationinCitybyRegion();
+    void getTestPopulationInCityByCountry(){
+        a.getPopulationInCityByCountry();
     }
-
     @Test
-    public void testPopulationConstructor(){
-        PopulationClass.Population p = new PopulationClass.Population();
+    void getTestPopulationInCityByRegion(){
+        a.getPopulationInCityByRegion();
+    }
+    @Test
+    void testLanguageConstructor(){
+        Language l = new Language();
+        l.setLanguage("Russian");
+        l.setPopulation(12);
+        l.setPercentage(1);
+        l.getLanguage();
+        l.getPercentage();
+        l.getPopulation();
+        l.toString();
+        Language l2 = new Language( 12, "Swedish",3);
+    }
+    @Test
+    void testPopulationConstructor(){
+        Population p = new Population();
         p.setCityPopulation(40000);
         p.setCityPopulationPercent(12);
         p.setName("Scottish");
@@ -385,22 +376,99 @@ class AppTest {
         p.getNotCityPopulation();
         p.getNonCityPopulationPercent();
         p.toString();
+    }
 
-
+    // *** Country reports ***
+    @Test
+    void testGetAllCountriesInWorld() {
+        a.getAllCountriesInWorld();
     }
     @Test
-    public void testLanguageConstructor(){
-        Language l = new Language();
-        l.setLanguage("Russian");
-        l.setPopulation(12);
-        l.setPercentage(1);
-        l.getLanguage();
-        l.getPercentage();
-        l.getPopulation();
-        l.toString();
-        Language l2 = new Language( 12, "Swedish",3);
-
+    void testGetTopNCountriesInWorld0() {
+        a.getTopNCountriesInWorld(0);
+    }
+    @Test
+    void testGetTopNCountriesInWorldNegative() {
+        a.getTopNCountriesInWorld(-1);
+    }
+    @Test
+    void testGetTopNCountriesInWorldBasic() {
+        a.getTopNCountriesInWorld(5);
+    }
+    @Test
+    void testGetAllCountriesInContinentBasic() {
+        a.getAllCountriesInContinent("Africa");
+    }
+    @Test
+    void testGetAllCountriesInContinentNull() {
+        a.getAllCountriesInContinent(null);
     }
 
+    // *** Top countries reports ***
+    @Test
+    void testGetTopNCountriesInContinentBothWrong() {
+        a.getTopNCountriesInContinent(null, 0);
+    }
+    @Test
+    void testGetTopNCountriesInContinentWrongLimit() {
+        a.getTopNCountriesInContinent("Africa", -1);
+    }
+    @Test
+    void testGetTopNCountriesInContinentWrongCont() {
+        a.getTopNCountriesInContinent(null, 5);
+    }
+    @Test
+    void testGetTopNCountriesInContinentBasic() {
+        a.getTopNCountriesInContinent("Africa", 5);
+    }
+    @Test
+    void testGetAllCountriesInRegionBasic() {
+        a.getAllCountriesInRegion("Baltic Countries");
+    }
+    @Test
+    void testGetAllCountriesInRegionNull() {
+        a.getAllCountriesInRegion(null);
+    }
+    @Test
+    void testGetTopNCountriesInRegionBothWrong() {
+        a.getTopNCountriesInRegion(null, 0);
+    }
+    @Test
+    void testGetTopNCountriesInRegionWrongLimit() {
+        a.getTopNCountriesInRegion("Baltic Countries", -1);
+    }
+    @Test
+    void testGetTopNCountriesInRegionWrongRegion() {
+        a.getTopNCountriesInRegion(null, 4);
+    }
+    @Test
+    void testGetTopNCountriesInRegionBasic() {
+        a.getTopNCountriesInRegion("Baltic Countries", 5);
+    }
 
+    // *** processCountryQuery ***
+    @Test
+    void testProcessCountryQueryNull(){
+        a.processCountryQuery(null);
+    }
+    @Test
+    void testProcessCountryQuery(){
+        a.processCountryQuery("query");
+    }
+    @Test
+    void testProcessPopulationQueryNull() {
+        a.processPopulationQuery(null);
+    }
+    @Test
+    void testProcessPopulationQuery() {
+        a.processPopulationQuery("query");
+    }
+    @Test
+    void testProcessCityQueryNull() {
+        a.processCityQuery(null);
+    }
+    @Test
+    void testProcessCityQuery() {
+        a.processCityQuery("query");
+    }
 }

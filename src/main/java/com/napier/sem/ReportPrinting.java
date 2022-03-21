@@ -48,7 +48,10 @@ public class ReportPrinting {
             }
         }
     }
-
+    /**
+     * Displays a list of countries with numbering
+     * @param countryList   countries to display
+     */
     public static void displayTopCountries(ArrayList < Country > countryList) {
         if (countryList == null || countryList.isEmpty()) {
             System.out.println("No countries to print");
@@ -92,7 +95,7 @@ public class ReportPrinting {
         }
     }
     /**
-     * Displays a list of countries
+     * Displays a list of cities with numbering
      * @param cityList   cities to display
      */
     public static void displayTopCities(ArrayList < City > cityList) {
@@ -114,6 +117,60 @@ public class ReportPrinting {
                 System.out.println(city);
                 counter++;
             }
+        }
+    }
+
+    /**
+     * Displays a list of populations
+     * @param populations   list of Population objects
+     * @param typeOfQuery
+     */
+    public static void displayPopulations(ArrayList<Population> populations, String typeOfQuery){
+        if(typeOfQuery == null) {
+            System.out.println("Invalid type of query specified to print header");
+        }
+        else {
+            System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",  typeOfQuery , "Population", "City Population", "City Population %", "Non City Population", "Non City Population %"));
+        }
+
+        if(populations == null || populations.isEmpty()) {
+            System.out.println("No populations to print");
+        }
+        else {
+            for (Population population : populations) {
+                if(population != null) {
+                    System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",
+                            population.getName(), population.getPopulation(), population.getCityPopulation(), population.getCityPopulationPercent(), population.getNotCityPopulation(), population.getNonCityPopulationPercent()));
+                }
+            }
+        }
+    }
+
+    /**
+     * Displays a report on languages
+     * @param language   list of Language objects
+     */
+    public static void displayLanguage(ArrayList<Language> language)
+    {
+        // Check language is not null
+        if (language == null)
+        {
+            System.out.println("No languages information available from the database!");
+            return;
+        }
+
+        // Print header
+        System.out.println(String.format("%-24s %-24s %-24s", "language", "Population", "Percentage"));
+        // Loop over all languages in the list
+        for (Language cnt : language)
+        {
+            if (cnt == null)
+                continue;
+
+            String cnt_string =
+                    String.format("%-24s %-24s %-24s",
+                            cnt.getLanguage(), cnt.getPopulation(), cnt.getPercentage());
+            System.out.println(cnt_string);
         }
     }
 }

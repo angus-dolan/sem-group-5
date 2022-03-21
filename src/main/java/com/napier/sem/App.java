@@ -2,7 +2,6 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
-import com.napier.sem.PopulationClass.Population;
 
 import static com.napier.sem.ReportPrinting.*;
 
@@ -95,9 +94,6 @@ public class App {
         System.out.println("Report of top " + n3 + " populated countries in " + region2);
         displayTopCountries(topNInRegion);
 
-
-
-
         ArrayList < City > retrieved = new ArrayList < City > ();
         int limit = 10;
         String continentName = "Africa";
@@ -109,7 +105,6 @@ public class App {
         retrieved = a.getAllCitiesInWorld();
         System.out.println("\nA report of all the cities in the world organised by largest population to smallest.");
         displayCities(retrieved);
-
 
         // Produce a report of all the cities in a continent organised by largest population to smallest.
         retrieved = a.getAllCitiesInContinent(continentName);
@@ -153,15 +148,15 @@ public class App {
 
         // Call population by country
         ArrayList<Population> allPopulationsCountry = new ArrayList<>();
-        allPopulationsCountry = a.getPopulationinCitybyCountry();
-        a.DisplayPopulations(allPopulationsCountry, "Country");
+        allPopulationsCountry = a.getPopulationInCityByCountry();
+        displayPopulations(allPopulationsCountry, "Country");
         System.out.println("");
         System.out.println("");
 
         // Call population by region
         ArrayList<Population> allPopulationsRegion = new ArrayList<>();
-        allPopulationsRegion = a.getPopulationinCitybyRegion();
-        a.DisplayPopulations(allPopulationsRegion, "Region");
+        allPopulationsRegion = a.getPopulationInCityByRegion();
+        displayPopulations(allPopulationsRegion, "Region");
         System.out.println("");
         System.out.println("");
 
@@ -348,6 +343,10 @@ public class App {
      * @return  list of Country objects
      */
     public ArrayList < Country > getTopNCountriesInWorld(int limit) {
+        if(limit <= 0) {
+            System.out.println("Invalid number specified");
+            return null;
+        }
         // query to get all countries in the world
         String query =
                 "SELECT Code, country.Name, Continent, Region, country.Population, city.Name AS 'Capital'" +
@@ -356,8 +355,10 @@ public class App {
                         " LIMIT " + limit;
         // execute the query
         ArrayList < Country > allCountries = processCountryQuery(query);
-        if (allCountries.size() < limit) {
-            System.out.println("***Not enough countries for this ranking. Returning all countries in the world***");
+        if (allCountries != null) {
+            if (allCountries.size() < limit) {
+                System.out.println("***Not enough countries for this ranking. Returning all countries in the world***");
+            }
         }
         return allCountries;
     }
@@ -373,9 +374,11 @@ public class App {
                 "WHERE Continent = '" + continentName + "' " +
                 "ORDER BY Population DESC";
         ArrayList < Country > countriesInContinent = processCountryQuery(query);
-        if (countriesInContinent.isEmpty()) {
-            System.out.println("Invalid continent specified.");
-            return null;
+        if(countriesInContinent != null) {
+            if (countriesInContinent.isEmpty()) {
+                System.out.println("Invalid continent specified.");
+                return null;
+            }
         }
         return countriesInContinent;
     }
@@ -393,12 +396,15 @@ public class App {
                 "ORDER BY Population DESC " +
                 "LIMIT " + limit;
         ArrayList < Country > countriesInContinent = processCountryQuery(query);
-        if (countriesInContinent.isEmpty()) {
-            System.out.println("Invalid continent specified.");
-            return null;
-        }
-        if (countriesInContinent.size() < limit) {
-            System.out.println("***Not enough countries in continent for this ranking. Returning all in continent***");
+
+        if(countriesInContinent != null) {
+            if (countriesInContinent.isEmpty()) {
+                System.out.println("Invalid continent specified.");
+                return null;
+            }
+            if (countriesInContinent.size() < limit) {
+                System.out.println("***Not enough countries in continent for this ranking. Returning all in continent***");
+            }
         }
         return countriesInContinent;
     }
@@ -414,9 +420,11 @@ public class App {
                 "WHERE Region = '" + regionName + "' " +
                 "ORDER BY Population DESC";
         ArrayList < Country > countriesInRegion = processCountryQuery(query);
-        if (countriesInRegion.isEmpty()) {
-            System.out.println("Invalid region specified.");
-            return null;
+        if(countriesInRegion != null) {
+            if (countriesInRegion.isEmpty()) {
+                System.out.println("Invalid region specified.");
+                return null;
+            }
         }
         return countriesInRegion;
     }
@@ -434,12 +442,14 @@ public class App {
                 "ORDER BY Population DESC " +
                 "LIMIT " + limit;
         ArrayList < Country > countriesInRegion = processCountryQuery(query);
-        if (countriesInRegion.isEmpty()) {
-            System.out.println("Invalid region specified.");
-            return null;
-        }
-        if (countriesInRegion.size() < limit) {
-            System.out.println("***Not enough countries in region for this ranking. Returning all countries in region***");
+        if(countriesInRegion != null) {
+            if (countriesInRegion.isEmpty()) {
+                System.out.println("Invalid region specified.");
+                return null;
+            }
+            if (countriesInRegion.size() < limit) {
+                System.out.println("***Not enough countries in region for this ranking. Returning all countries in region***");
+            }
         }
         return countriesInRegion;
     }
@@ -707,26 +717,19 @@ public class App {
             return null;
         }
     }
-    
-    /**
-     * Create a Population object based on its code
-     * @return      the population of people living in cities and living outside cities in both numbers and percents
-     */
-    public ArrayList<Population> getPopulationinCitybyContinent() {
-        try {
-            ArrayList<Population> output = new ArrayList<>();
 
+    /**
+     * Processes an SQL query to get a list of populations
+     * @param query Query to process
+     * @return  a list of City objects
+     */
+    public ArrayList<Population> processPopulationQuery(String query) {
+        ArrayList<Population> populations = new ArrayList<>();
+        try{
             // Creates an SQL statement.
             Statement stmt = con.createStatement();
-
-            // Creates an SQL statement, stored as a STRING.
-            String strSelect =
-                    "SELECT country.continent, SUM(DISTINCT country.population), SUM(city.population) "
-                            + "FROM city JOIN country ON CountryCode=code "
-                            + "GROUP BY country.continent ";
-
             // Sends the SQL statement to the database.
-            ResultSet rset = stmt.executeQuery(strSelect);
+            ResultSet rset = stmt.executeQuery(query);
 
             // Indicates which columns on the database align to which attributes within "country".
             while (rset.next()) {
@@ -740,150 +743,67 @@ public class App {
                 popReport.setNotCityPopulation(outCity);
                 double percentNonCity = Math.round((outCity * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
                 popReport.setNonCityPopulationPercent(percentNonCity);
-
-
-                // Adds this country (plus details) to the ArrayList.
-                //System.out.println(popReport);
-                output.add(popReport);
-
-            }//end while
-
-            return output;
-
-        }//end try
+                populations.add(popReport);
+            }
+            return populations;
+        }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get information from database (City); check connection?");
+            System.out.println("Failed to get population data");
             return null;
-        }//end catch
-    }//end getPopulationinCitybyContinent
-
-    //Display populations
-    public static void DisplayPopulations(ArrayList<Population> populations, String typeOfQuery){
-        System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",  typeOfQuery , "Population", "City Population", "City Population %", "Non City Population", "Non City Population %"));
-        if (populations.isEmpty() || populations.contains(null) || populations == null){
-            System.out.println("*** No populations retrieved ***");
         }
-        else {
-            for (Population population : populations) {
-                System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",
-                        population.getName(), population.getPopulation(), population.getCityPopulation(), population.getCityPopulationPercent(), population.getNotCityPopulation(), population.getNonCityPopulationPercent()));
-
-            }
-        }
-
     }
-/**
-     * Create a Population object based on its code
-     * @return      the population of people living in cities and living outside cities in both numbers and percents in each country
-     */
-    public ArrayList<Population> getPopulationinCitybyCountry() {
-        try {
-            ArrayList<Population> output = new ArrayList<>();
 
-            // Creates an SQL statement.
-            Statement stmt = con.createStatement();
-
-            // Creates an SQL statement, stored as a STRING.
-            String strSelect =
-                    "SELECT country.Name, SUM(DISTINCT country.population), SUM(city.population) "
-                            + "FROM city JOIN country ON CountryCode=code "
-                            + "GROUP BY country.Name ";
-
-            // Sends the SQL statement to the database.
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            // Indicates which columns on the database align to which attributes within "country".
-            while (rset.next()) {
-                Population popReport = new Population();
-                popReport.setName(rset.getString("country.Name"));
-                popReport.setPopulation(rset.getLong("SUM(DISTINCT country.population)"));
-                double percentCity = Math.round((rset.getLong("SUM(city.population)") * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
-                popReport.setCityPopulationPercent(percentCity);
-                popReport.setCityPopulation(rset.getLong("SUM(city.population)"));
-                long outCity = (rset.getLong("SUM(DISTINCT country.population)") - rset.getLong("SUM(city.population)"));
-                popReport.setNotCityPopulation(outCity);
-                double percentNonCity = Math.round((outCity * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
-                popReport.setNonCityPopulationPercent(percentNonCity);
-
-
-                output.add(popReport);
-            }//end while
-
-            return output;
-
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get information from database (City); check connection?");
-            return null;
-        }// end the exception handler
-    }//end getPopulationinCitybyCountry
-
-/**
-     * Create a Population object based on its code
-     * @return      the population of people living in cities and living outside cities in both numbers and percents in each region
-     */
-
-    public ArrayList<Population> getPopulationinCitybyRegion() {
-        try {
-            ArrayList<Population> output = new ArrayList<>();
-
-            // Creates an SQL statement.
-            Statement stmt = con.createStatement();
-
-            // Creates an SQL statement, stored as a STRING.
-            String strSelect =
-                    "SELECT country.region, SUM(DISTINCT country.population), SUM(city.population) "
-                            + "FROM city JOIN country ON CountryCode=code "
-                            + "GROUP BY country.region ";
-
-            // Sends the SQL statement to the database.
-            ResultSet rset = stmt.executeQuery(strSelect);
-            if(rset == null){
-                return output;
-            }
-
-            // Indicates which columns on the database align to which attributes within "country".
-            while (rset.next()) {
-                Population popReport = new Population();
-                popReport.setName(rset.getString("country.region"));
-                popReport.setPopulation(rset.getLong("SUM(DISTINCT country.population)"));
-                double percentCity = Math.round((rset.getLong("SUM(city.population)") * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
-                popReport.setCityPopulationPercent(percentCity);
-                popReport.setCityPopulation(rset.getLong("SUM(city.population)"));
-                long outCity = (rset.getLong("SUM(DISTINCT country.population)") - rset.getLong("SUM(city.population)"));
-                popReport.setNotCityPopulation(outCity);
-                double percentNonCity = Math.round((outCity * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
-                popReport.setNonCityPopulationPercent(percentNonCity);
-
-
-                output.add(popReport);
-            }//end while
-
-            return output;
-
-        }//end try
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get information from database (City); check connection?");
-            return null;
-        }//end catch
-    }//end getPopulationinCitybyContinent
-    
     /**
-     * Create a Language object based on its code
-     * @return     a ResultSet with the information about the 5 languages
+     * Returns a list of Populations of people living in cities in each continent
+     * @return   arrayList of Population objects
      */
+    public ArrayList<Population> getPopulationInCityByContinent() {
+        // Creates an SQL statement, stored as a STRING.
+        String strSelect =
+                "SELECT country.Continent, SUM(DISTINCT country.Population), SUM(city.Population) "
+                        + "FROM city JOIN country ON CountryCode=code "
+                        + "GROUP BY country.Continent ";
+        ArrayList<Population> populations = processPopulationQuery(strSelect);
+        return populations;
+    }
 
-    public ResultSet getLanguage()
-    {
-        // Creates an SQL statement.
-        try
-        {
+    /**
+     * Returns a list of Populations of people living in cities in each country
+     * @return   arrayList of Population objects
+     */
+    public ArrayList<Population> getPopulationInCityByCountry() {
+        // Creates an SQL statement, stored as a STRING.
+        String strSelect =
+                "SELECT country.Name, SUM(DISTINCT country.population), SUM(city.population) "
+                        + "FROM city JOIN country ON CountryCode=code "
+                        + "GROUP BY country.Name ";
+        ArrayList<Population> populations = processPopulationQuery(strSelect);
+        return populations;
+    }
+
+    /**
+     * Returns a list of Populations of people living in cities in each region
+     * @return   arrayList of Population objects
+     */
+    public ArrayList<Population> getPopulationInCityByRegion() {
+        // Creates an SQL statement, stored as a STRING.
+        String strSelect =
+                "SELECT country.region, SUM(DISTINCT country.population), SUM(city.population) "
+                        + "FROM city JOIN country ON CountryCode=code "
+                        + "GROUP BY country.region ";
+        ArrayList<Population> populations = processPopulationQuery(strSelect);
+        return populations;
+    }
+
+    /**
+     * Returns a report of people speaking Chinese, English, Hindi, Spanish and Arabic
+     * @return  ResultSet from the query
+     */
+    public ResultSet getLanguage() {
+        try {
             ArrayList<Language> output = new ArrayList<>();
             {
-
                 // Create string for SQL statement
                 String strSelect =
                         "SELECT la.Language, ROUND(SUM((co.Population * la.Percentage) / 100)) AS 'Population', (((ROUND(SUM((co.Population * la.Percentage) / 100))) * 100) / (SELECT SUM(country.Population) FROM country)) AS 'WorldPercentage' "
@@ -901,60 +821,26 @@ public class App {
                 // Execute SQL statement
                 ResultSet rset = stmt.executeQuery(strSelect);
 
-                while(rset.next()){
+                while (rset.next()) {
                     ResultSetMetaData rsMetaData = rset.getMetaData();
                     int numberOfColumns = rsMetaData.getColumnCount();
                     ResultSetMetaData rsmd = rset.getMetaData();
-// get the column names; column indexes start from 1
+                    // get the column names; column indexes start from 1
                     for (int i = 1; i <= 3; i++) {
-                        if (i > 1) System.out.print(",  ");
+                        if (i > 1) {
+                            System.out.print(",  ");
+                        }
                         String columnValue = rset.getString(i);
                         System.out.print(columnValue + " " + rsmd.getColumnName(i));
                     }
                     System.out.println("");
                 }
-
                 return rset;
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get language details");
             return null;
         }
     }
-    
-    
-    /**
-     * Create a Population object based on its code
-     * @param       language as arraylist that was generated from the rset
-     * @return      the information about the languages
-     */
-
-    public void displayLanguage(ArrayList<Language> language)
-    {
-        // Check language is not null
-        if (language == null)
-        {
-            System.out.println("No languages information available from the database!");
-            return;
-        }
-
-        // Print header
-        System.out.println(String.format("%-24s %-24s %-24s", "language", "Population", "Percentage"));
-        // Loop over all languages in the list
-        for (Language cnt : language)
-        {
-            if (cnt == null)
-                continue;
-
-            String cnt_string =
-                    String.format("%-24s %-24s %-24s",
-                            cnt.getLanguage(), cnt.getPopulation(), cnt.getPercentage());
-            System.out.println(cnt_string);
-        }
-    }
-
-
 }
