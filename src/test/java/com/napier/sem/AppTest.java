@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static com.napier.sem.ReportPrinting.*;
+import static com.napier.sem.App.*;
+import static com.napier.sem.PopulationClass.*;
 
 class AppTest
 {
@@ -69,6 +71,16 @@ class AppTest
         c.setName("United Kingdom");
         countries.add(c);
         displayTopCountries(countries);
+    }
+
+    @Test
+    void testNullDisplayPopulations(){
+        ArrayList<PopulationClass.Population> populations = new ArrayList<>();
+        PopulationClass.Population p = new PopulationClass.Population();
+        p = null;
+        populations.add(p);
+
+        DisplayPopulations(populations,"test");
     }
 
 }

@@ -364,11 +364,18 @@ public class App
 
     //Display populations
     public static void DisplayPopulations(ArrayList<PopulationClass.Population> populations, String typeOfQuery){
+        try{
+
+
         System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",  typeOfQuery , "Population", "City Population", "City Population %", "Non City Population", "Non City Population %"));
 
         for(PopulationClass.Population population : populations){
             System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",
                     population.getName(), population.getPopulation(), population.getCityPopulation(), population.getCityPopulationPercent(), population.getNotCityPopulation(), population.getNonCityPopulationPercent()));
+        }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed!");
         }
     }
 
