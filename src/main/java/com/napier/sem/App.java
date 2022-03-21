@@ -719,6 +719,20 @@ public class App {
     }
 
     /**
+     *
+     * @param populations takes the information about population living in cities and outside cities in order to print it out
+     * @param typeOfQuery takes the type of the exact query so it'll display it with the actual message
+     */
+    public static void DisplayPopulations(ArrayList<Population> populations, String typeOfQuery){
+        System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",  typeOfQuery , "Population", "City Population", "City Population %", "Non City Population", "Non City Population %"));
+
+        for(Population population : populations){
+            System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",
+                    population.getName(), population.getPopulation(), population.getCityPopulation(), population.getCityPopulationPercent(), population.getNotCityPopulation(), population.getNonCityPopulationPercent()));
+        }
+    }
+
+    /**
      * Processes an SQL query to get a list of populations
      * @param query Query to process
      * @return  a list of City objects
@@ -759,42 +773,146 @@ public class App {
      * @return   arrayList of Population objects
      */
     public ArrayList<Population> getPopulationInCityByContinent() {
-        // Creates an SQL statement, stored as a STRING.
-        String strSelect =
-                "SELECT country.Continent, SUM(DISTINCT country.Population), SUM(city.Population) "
-                        + "FROM city JOIN country ON CountryCode=code "
-                        + "GROUP BY country.Continent ";
-        ArrayList<Population> populations = processPopulationQuery(strSelect);
-        return populations;
-    }
+        try {
+            ArrayList<Population> output = new ArrayList<>();
+
+            // Creates an SQL statement.
+            Statement stmt = con.createStatement();
+
+            // Creates an SQL statement, stored as a STRING.
+            String strSelect =
+                    "SELECT country.continent, SUM(DISTINCT country.population), SUM(city.population) "
+                            + "FROM city JOIN country ON CountryCode=code "
+                            + "GROUP BY country.continent ";
+
+            // Sends the SQL statement to the database.
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Indicates which columns on the database align to which attributes within "country".
+            while (rset.next()) {
+                Population popReport = new Population();
+                popReport.setName(rset.getString("country.continent"));
+                popReport.setPopulation(rset.getLong("SUM(DISTINCT country.population)"));
+                double percentCity = Math.round((rset.getLong("SUM(city.population)") * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
+                popReport.setCityPopulationPercent(percentCity);
+                popReport.setCityPopulation(rset.getLong("SUM(city.population)"));
+                long outCity = (rset.getLong("SUM(DISTINCT country.population)") - rset.getLong("SUM(city.population)"));
+                popReport.setNotCityPopulation(outCity);
+                double percentNonCity = Math.round((outCity * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
+                popReport.setNonCityPopulationPercent(percentNonCity);
+
+
+                // Adds this country (plus details) to the ArrayList.
+                //System.out.println(popReport);
+                output.add(popReport);
+
+            }//end while
+
+            return output;
+
+        }//end try
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get information from database (City); check connection?");
+            return null;
+        }//end catch
+    }//end getPopulationinCitybyContinent
+
 
     /**
      * Returns a list of Populations of people living in cities in each country
      * @return   arrayList of Population objects
      */
     public ArrayList<Population> getPopulationInCityByCountry() {
-        // Creates an SQL statement, stored as a STRING.
-        String strSelect =
-                "SELECT country.Name, SUM(DISTINCT country.population), SUM(city.population) "
-                        + "FROM city JOIN country ON CountryCode=code "
-                        + "GROUP BY country.Name ";
-        ArrayList<Population> populations = processPopulationQuery(strSelect);
-        return populations;
-    }
+        try {
+            ArrayList<Population> output = new ArrayList<>();
+
+            // Creates an SQL statement.
+            Statement stmt = con.createStatement();
+
+            // Creates an SQL statement, stored as a STRING.
+            String strSelect =
+                    "SELECT country.Name, SUM(DISTINCT country.population), SUM(city.population) "
+                            + "FROM city JOIN country ON CountryCode=code "
+                            + "GROUP BY country.Name ";
+
+            // Sends the SQL statement to the database.
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Indicates which columns on the database align to which attributes within "country".
+            while (rset.next()) {
+                Population popReport = new Population();
+                popReport.setName(rset.getString("country.Name"));
+                popReport.setPopulation(rset.getLong("SUM(DISTINCT country.population)"));
+                double percentCity = Math.round((rset.getLong("SUM(city.population)") * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
+                popReport.setCityPopulationPercent(percentCity);
+                popReport.setCityPopulation(rset.getLong("SUM(city.population)"));
+                long outCity = (rset.getLong("SUM(DISTINCT country.population)") - rset.getLong("SUM(city.population)"));
+                popReport.setNotCityPopulation(outCity);
+                double percentNonCity = Math.round((outCity * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
+                popReport.setNonCityPopulationPercent(percentNonCity);
+
+
+                output.add(popReport);
+            }//end while
+
+            return output;
+
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get information from database (City); check connection?");
+            return null;
+        }// end the exception handler
+    }//end getPopulationinCitybyCountry
+
 
     /**
      * Returns a list of Populations of people living in cities in each region
      * @return   arrayList of Population objects
      */
     public ArrayList<Population> getPopulationInCityByRegion() {
-        // Creates an SQL statement, stored as a STRING.
-        String strSelect =
-                "SELECT country.region, SUM(DISTINCT country.population), SUM(city.population) "
-                        + "FROM city JOIN country ON CountryCode=code "
-                        + "GROUP BY country.region ";
-        ArrayList<Population> populations = processPopulationQuery(strSelect);
-        return populations;
-    }
+        try {
+            ArrayList<Population> output = new ArrayList<>();
+
+            // Creates an SQL statement.
+            Statement stmt = con.createStatement();
+
+            // Creates an SQL statement, stored as a STRING.
+            String strSelect =
+                    "SELECT country.region, SUM(DISTINCT country.population), SUM(city.population) "
+                            + "FROM city JOIN country ON CountryCode=code "
+                            + "GROUP BY country.region ";
+
+            // Sends the SQL statement to the database.
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Indicates which columns on the database align to which attributes within "country".
+            while (rset.next()) {
+                Population popReport = new Population();
+                popReport.setName(rset.getString("country.region"));
+                popReport.setPopulation(rset.getLong("SUM(DISTINCT country.population)"));
+                double percentCity = Math.round((rset.getLong("SUM(city.population)") * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
+                popReport.setCityPopulationPercent(percentCity);
+                popReport.setCityPopulation(rset.getLong("SUM(city.population)"));
+                long outCity = (rset.getLong("SUM(DISTINCT country.population)") - rset.getLong("SUM(city.population)"));
+                popReport.setNotCityPopulation(outCity);
+                double percentNonCity = Math.round((outCity * 1D) / rset.getLong("SUM(DISTINCT country.population)") * 100);
+                popReport.setNonCityPopulationPercent(percentNonCity);
+
+
+                output.add(popReport);
+            }//end while
+
+            return output;
+
+        }//end try
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get information from database (City); check connection?");
+            return null;
+        }//end catch
+    }//end getPopulationinCitybyContinent
 
     /**
      * Returns a report of people speaking Chinese, English, Hindi, Spanish and Arabic
