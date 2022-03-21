@@ -1,5 +1,10 @@
 package com.napier.sem;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 /**
  * representation of a city
  */
@@ -92,4 +97,6 @@ public class City {
     public void setPopulation(long population) {
         this.population = population;
     }
+
+
 }
