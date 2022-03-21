@@ -370,6 +370,36 @@ class AppTest {
     public void getTestPopulationinCitybyRegion(){
         a.getPopulationinCitybyRegion();
     }
+    @Test
+    public void testPopulationConstructor(){
+        PopulationClass.Population p = new PopulationClass.Population();
+        p.setCityPopulation(40000);
+        p.setCityPopulationPercent(12);
+        p.setName("Scottish");
+        p.setNotCityPopulation(90000);
+        p.setNonCityPopulationPercent(88);
+        p.getCityPopulation();
+        p.getCityPopulationPercent();
+        p.getName();
+        p.getNotCityPopulation();
+        p.getNonCityPopulationPercent();
+        p.toString();
+
+
+    }
+    @Test
+    public void testLanguageConstructor(){
+        Language l = new Language();
+        l.setLanguage("Russian");
+        l.setPopulation(12);
+        l.setPercentage(1);
+        l.getLanguage();
+        l.getPercentage();
+        l.getPopulation();
+        l.toString();
+        Language l2 = new Language( 12, "Swedish",3);
+
+    }
 
 
 }
