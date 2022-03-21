@@ -2,6 +2,7 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import com.napier.sem.PopulationClass.Population;
 
 import static com.napier.sem.ReportPrinting.*;
 
