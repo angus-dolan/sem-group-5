@@ -635,7 +635,10 @@ public class App {
         }
 
     }
-
+/**
+     * Create a Population object based on its code
+     * @return      the population of people living in cities and living outside cities in both numbers and percents in each country
+     */
     public ArrayList<Population> getPopulationinCitybyCountry() {
         try {
             ArrayList<Population> output = new ArrayList<>();
@@ -679,7 +682,10 @@ public class App {
         }// end the exception handler
     }//end getPopulationinCitybyCountry
 
-
+/**
+     * Create a Population object based on its code
+     * @return      the population of people living in cities and living outside cities in both numbers and percents in each region
+     */
 
     public ArrayList<Population> getPopulationinCitybyRegion() {
         try {
@@ -726,6 +732,11 @@ public class App {
             return null;
         }//end catch
     }//end getPopulationinCitybyContinent
+    
+    /**
+     * Create a Language object based on its code
+     * @return     a ResultSet with the information about the 5 languages
+     */
 
     public ResultSet getLanguage()
     {
@@ -775,6 +786,13 @@ public class App {
             return null;
         }
     }
+    
+    
+    /**
+     * Create a Population object based on its code
+     * @param       language as arraylist that was generated from the rset
+     * @return      the information about the languages
+     */
 
     public void displayLanguage(ArrayList<Language> language)
     {
