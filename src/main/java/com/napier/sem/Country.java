@@ -41,38 +41,6 @@ public class Country {
     }
 
     /**
-     * Creates a Country objects with parameters passed.
-     * @param code  Country's code
-     * @param name  Country name
-     * @param continent Country's continent
-     * @param region    Country's region
-     */
-    public Country(String code, String name, String continent, String region) {
-        this.code = code;
-        this.name = name;
-        this.continent = continent;
-        this.region = region;
-    }
-
-    /**
-     * Creates a Country objects with parameters passed.
-     * @param code  Country's code
-     * @param name  Country name
-     * @param continent Country's continent
-     * @param region    Country's region
-     * @param population    Country's population
-     * @param capital   Country's capital code
-     */
-    public Country(String code, String name, String continent, String region, int population, String capital) {
-        this.code = code;
-        this.name = name;
-        this.continent = continent;
-        this.region = region;
-        this.population = population;
-        this.capital = capital;
-    }
-
-    /**
      * Gets the country's code
      * @return  country code
      */
