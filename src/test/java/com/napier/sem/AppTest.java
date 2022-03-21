@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static com.napier.sem.ReportPrinting.*;
 
-class AppTest
-{
-    ArrayList<Country> countries;
-    ArrayList<City> cities;
+class AppTest {
+    ArrayList < Country > countries;
+    ArrayList < City > cities;
 
 
     @Test
@@ -20,20 +19,20 @@ class AppTest
 
     @Test
     void displayCountriesTestEmpty() {
-        countries = new ArrayList<>();
+        countries = new ArrayList < > ();
         displayCountries(countries);
     }
 
     @Test
     void displayCountriesContainsNull() {
-        countries = new ArrayList<>();
+        countries = new ArrayList < > ();
         countries.add(null);
         displayCountries(countries);
     }
 
     @Test
     void displayCountriesBasic() {
-        countries = new ArrayList<>();
+        countries = new ArrayList < > ();
         Country c = new Country();
         c.setCode("GBR");
         c.setName("United Kingdom");
@@ -52,20 +51,20 @@ class AppTest
 
     @Test
     void displayTopCountriesTestEmpty() {
-        countries = new ArrayList<>();
+        countries = new ArrayList < > ();
         displayTopCountries(countries);
     }
 
     @Test
     void displayTopCountriesContainsNull() {
-        countries = new ArrayList<>();
+        countries = new ArrayList < > ();
         countries.add(null);
         displayTopCountries(countries);
     }
 
     @Test
     void displayTopCountriesBasic() {
-        countries = new ArrayList<>();
+        countries = new ArrayList < > ();
         Country c = new Country();
         c.setCode("GBR");
         c.setName("United Kingdom");
@@ -81,20 +80,20 @@ class AppTest
 
     @Test
     void displayCitiesTestEmptySet() {
-        cities = new ArrayList<>();
+        cities = new ArrayList < > ();
         displayCities(cities);
     }
 
     @Test
     void displayCitiesTestSetContainsNull() {
-        cities = new ArrayList<>();
+        cities = new ArrayList < > ();
         cities.add(null);
         displayCities(cities);
     }
 
     @Test
     void displayCitiesTestStandard() {
-        cities = new ArrayList<>();
+        cities = new ArrayList < > ();
         City city = new City();
         city.setCountry("France");
         city.setName("Paris");
@@ -106,13 +105,13 @@ class AppTest
 
     @Test
     void displayTopCitiesTestContainsNull() {
-        cities = new ArrayList<City>();
+        cities = new ArrayList < City > ();
         cities.add(null);
         displayTopCountries(countries);
     }
     @Test
     void displayTopCitiesTestStandard() {
-        cities = new ArrayList<>();
+        cities = new ArrayList < > ();
         City city = new City();
         city.setName("Paris");
         city.setPopulation(400);
@@ -123,7 +122,7 @@ class AppTest
     }
     @Test
     void displayTopCitiesTestEmptySet() {
-        cities = new ArrayList<>();
+        cities = new ArrayList < > ();
         displayTopCities(cities);
     }
     @Test
