@@ -2,6 +2,7 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.*;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -325,10 +326,50 @@ class AppTest {
     void topNCitiesInCountryNormal(){
         cities = new ArrayList<>();
         int pass = 5;
-        cities = a.getNCitiesInCountry(pass, "");
+        cities = a.getNCitiesInCountry(pass, "France");
 
     }
+    @Test
+    public void testLanguage(){
+        ResultSet r = a.getLanguage();
+    }
+    @Test
+    public void testDisplayLanguageNull(){
+         a.displayLanguage(null);
+    }
+    @Test
+    public void testDisplayLanguageEmpty(){
+        ArrayList languages = new ArrayList();
+        a.displayLanguage(languages);
+    }
+    @Test
+    public void testDisplayLanguageNormal(){
+        ArrayList <Language> languages = new ArrayList();
+        Language l = new Language(900000, "Arabic", 17);
 
+        languages.add(l);
+        a.displayLanguage(languages);
+    }
+    @Test
+    public void testDisplayLanguageNullEntry(){
+        ArrayList <Language> languages = new ArrayList();
+        languages.add(null);
+        a.displayLanguage(languages);
+    }
+    @Test
+    public void getTestPopulationinCitybyContinent(){
+        a.getPopulationinCitybyContinent();
+    }
+
+    @Test
+    public void getTestPopulationinCitybyCountry(){
+        a.getPopulationinCitybyCountry();
+    }
+
+    @Test
+    public void getTestPopulationinCitybyRegion(){
+        a.getPopulationinCitybyRegion();
+    }
 
 
 }

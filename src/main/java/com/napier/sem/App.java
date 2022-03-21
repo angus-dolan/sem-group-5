@@ -123,14 +123,14 @@ public class App {
         
         // Call population by country
         ArrayList<Population> allPopulationsCountry = new ArrayList<>();
-        allPopulationsCountry = a.getPopulationinCitybyCountry(a.con);
+        allPopulationsCountry = a.getPopulationinCitybyCountry();
         a.DisplayPopulations(allPopulationsCountry, "Country");
         System.out.println("");
         System.out.println("");
 
         // Call population by region
         ArrayList<Population> allPopulationsRegion = new ArrayList<>();
-        allPopulationsRegion = a.getPopulationinCitybyRegion(a.con);
+        allPopulationsRegion = a.getPopulationinCitybyRegion();
         a.DisplayPopulations(allPopulationsRegion, "Region");
         System.out.println("");
         System.out.println("");
@@ -572,10 +572,9 @@ public class App {
     
     /**
      * Create a Population object based on its code
-     * @param       con name
      * @return      the population of people living in cities and living outside cities in both numbers and percents
      */
-    public ArrayList<Population> getPopulationinCitybyContinent(Connection con) {
+    public ArrayList<Population> getPopulationinCitybyContinent() {
         try {
             ArrayList<Population> output = new ArrayList<>();
 
@@ -637,7 +636,7 @@ public class App {
 
     }
 
-    public ArrayList<Population> getPopulationinCitybyCountry(Connection con) {
+    public ArrayList<Population> getPopulationinCitybyCountry() {
         try {
             ArrayList<Population> output = new ArrayList<>();
 
@@ -682,7 +681,7 @@ public class App {
 
 
 
-    public ArrayList<Population> getPopulationinCitybyRegion(Connection con) {
+    public ArrayList<Population> getPopulationinCitybyRegion() {
         try {
             ArrayList<Population> output = new ArrayList<>();
 
@@ -697,6 +696,9 @@ public class App {
 
             // Sends the SQL statement to the database.
             ResultSet rset = stmt.executeQuery(strSelect);
+            if(rset == null){
+                return output;
+            }
 
             // Indicates which columns on the database align to which attributes within "country".
             while (rset.next()) {
@@ -762,10 +764,6 @@ public class App {
                     }
                     System.out.println("");
                 }
-
-
-
-
 
                 return rset;
             }
