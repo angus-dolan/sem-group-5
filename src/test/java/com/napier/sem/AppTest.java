@@ -11,6 +11,7 @@ class AppTest {
     ArrayList < Country > countries;
     ArrayList<Population> populations;
     ArrayList < City > cities;
+    ArrayList < CapitalCity > capCities;
     App a = new App();
 
     // *** displayCountries ***
@@ -471,4 +472,42 @@ class AppTest {
     void testProcessCityQuery() {
         a.processCityQuery("query");
     }
+
+    // *** Capital City Reports ***
+    @Test
+    void displayCapitalCitiesTestNull() {
+        displayCapitalCities(null);
+    }
+    @Test
+    void displayCapitalCitiesTestEmpty() {
+        capCities = new ArrayList<>();
+        displayCapitalCities(capCities);
+    }
+    @Test
+    void displayCapitalCitiesContainsNull() {
+        capCities = new ArrayList < > ();
+        capCities.add(null);
+        displayCapitalCities(capCities);
+    }
+    @Test
+    void displayCapitalCitiesBasic() {
+        capCities = new ArrayList < > ();
+        CapitalCity c = new CapitalCity();
+
+        c.setID("5");
+        c.setName("Amsterdam");
+        c.setCountryCode("NLD");
+        c.setDistrict("Noord-Holland");
+        c.setPopulation("731200");
+
+        c.getID();
+        c.getName();
+        c.getCountryCode();
+        c.getDistrict();
+        c.getPopulation();
+
+        capCities.add(c);
+        displayCapitalCities(capCities);
+    }
+
 }

@@ -1,5 +1,8 @@
 package com.napier.sem;
 
+/**
+ * Represents a Capital City
+ */
 public class CapitalCity {
     String ID;
     String Name;
