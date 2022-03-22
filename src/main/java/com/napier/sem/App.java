@@ -930,7 +930,7 @@ public class App {
      * Returns a report of people speaking Chinese, English, Hindi, Spanish and Arabic
      * @return  ResultSet from the query
      */
-    public ResultSet getLanguage() {
+        public ResultSet getLanguage() {
         try {
             ArrayList<Language> output = new ArrayList<>();
             {
@@ -950,6 +950,8 @@ public class App {
                 Statement stmt = con.createStatement();
                 // Execute SQL statement
                 ResultSet rset = stmt.executeQuery(strSelect);
+                System.out.println("\nA report that returns the information about the wanted languages speakers and the percentage of the world population");
+                System.out.println(String.format("%-14s %-24s %-24s", "Language", "Population of speakers", "% of world population"));
 
                 while (rset.next()) {
                     ResultSetMetaData rsMetaData = rset.getMetaData();
@@ -958,10 +960,9 @@ public class App {
                     // get the column names; column indexes start from 1
                     for (int i = 1; i <= 3; i++) {
                         if (i > 1) {
-                            System.out.print(",  ");
                         }
                         String columnValue = rset.getString(i);
-                        System.out.print(columnValue + " " + rsmd.getColumnName(i));
+                        System.out.print(columnValue + "             ");
                     }
                     System.out.println("");
                 }
