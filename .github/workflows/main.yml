@@ -2,8 +2,8 @@ name: A workflow for my Hello World App
 on:
   push:
     branches:
+      - develop
       - master
-      - lab08
       - integ_tests
 jobs:
   UnitTests:
