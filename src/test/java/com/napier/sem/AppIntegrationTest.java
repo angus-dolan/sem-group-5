@@ -74,7 +74,18 @@ public class AppIntegrationTest {
         ArrayList<City> top5 = app.getNCitiesInContinent(2, "Asia");
         assertEquals(top5.size(), 2);
         assertEquals(top5.get(0).getName(), "Mumbai (Bombay)");
+        assertEquals(top5.get(0).getCountry(), "India");
+        assertEquals(top5.get(0).getDistrict(), "Maharashtra ");
+        assertEquals(top5.get(0).getPopulation(), 10500000 );
         assertEquals(top5.get(1).getName(), "Seoul");
+        top5.get(1).setDistrict("exampleDistrict");
+        top5.get(1).setName("myName");
+        top5.get(1).setCountry("myCountry");
+        top5.get(1).setPopulation(456);
+        assertEquals(top5.get(1).getName(), "myName");
+        assertEquals(top5.get(1).getCountry(), "myCountry");
+        assertEquals(top5.get(1).getDistrict(), "exampleDistrict");
+        assertEquals(top5.get(1).getPopulation(), 456);
     }
 
     @Test
