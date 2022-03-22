@@ -156,7 +156,7 @@ public class App {
         
         // Call population by continent
         ArrayList<Population> allPopulationsContinent = new ArrayList<>();
-        allPopulationsRegion = a.getPopulationInCityByContinent();
+        allPopulationsContinent = a.getPopulationInCityByContinent();
         System.out.println("\nA report of the population of the people living in cities and outside cities in each continent");
         displayPopulations(allPopulationsContinent, "Continent");
         System.out.println("");
