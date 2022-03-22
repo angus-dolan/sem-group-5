@@ -75,7 +75,7 @@ public class AppIntegrationTest {
         assertEquals(top5.size(), 2);
         assertEquals(top5.get(0).getName(), "Mumbai (Bombay)");
         assertEquals(top5.get(0).getCountry(), "India");
-        assertEquals(top5.get(0).getDistrict(), "Maharashtra ");
+        assertEquals(top5.get(0).getDistrict(), "Maharashtra");
         assertEquals(top5.get(0).getPopulation(), 10500000 );
         assertEquals(top5.get(1).getName(), "Seoul");
         top5.get(1).setDistrict("exampleDistrict");
