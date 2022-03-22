@@ -241,6 +241,13 @@ public class App {
         // Execute query
         ArrayList <CapitalCity> res = processCapitalCityQuery(query);
 
+        if(res != null) {
+            if (res.isEmpty()) {
+                System.out.println("Invalid continent specified.");
+                return null;
+            }
+        }
+
         return res;
     }
     /**
@@ -265,6 +272,16 @@ public class App {
         // Execute query
         ArrayList <CapitalCity> res = processCapitalCityQuery(query);
 
+        if(res != null) {
+            if (res.isEmpty()) {
+                System.out.println("Invalid region specified.");
+                return null;
+            }
+            if (res.size() < limit) {
+                System.out.println("***Not enough capital cities in region for this ranking. Returning all capital's in region***");
+            }
+        }
+
         return res;
     }
     /**
@@ -276,6 +293,13 @@ public class App {
         String query = "SELECT * FROM city JOIN country ON country.Capital = city.id WHERE country.Region = '" + region + "' ORDER BY city.Population DESC;";
         // Execute query
         ArrayList <CapitalCity> res = processCapitalCityQuery(query);
+
+        if(res != null) {
+            if (res.isEmpty()) {
+                System.out.println("Invalid region specified.");
+                return null;
+            }
+        }
 
         return res;
     }
@@ -289,6 +313,12 @@ public class App {
         // Execute query
         ArrayList <CapitalCity> res = processCapitalCityQuery(query);
 
+        if(res != null) {
+            if (res.size() < limit) {
+                System.out.println("***Not enough capital cities for limit provided.***");
+            }
+        }
+
         return res;
     }
     /**
@@ -300,6 +330,16 @@ public class App {
         String query = "SELECT * FROM city JOIN country ON country.Capital = city.id WHERE country.Continent = '" + continent + "' ORDER BY city.Population DESC LIMIT " + limit;
         // Execute query
         ArrayList <CapitalCity> res = processCapitalCityQuery(query);
+
+        if(res != null) {
+            if (res.isEmpty()) {
+                System.out.println("Invalid continent specified.");
+                return null;
+            }
+            if (res.size() < limit) {
+                System.out.println("***Not enough capital cities in continent for this ranking. Returning all capital's in continent***");
+            }
+        }
 
         return res;
     }

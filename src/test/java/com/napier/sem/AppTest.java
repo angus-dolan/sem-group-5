@@ -509,5 +509,69 @@ class AppTest {
         capCities.add(c);
         displayCapitalCities(capCities);
     }
-
+    // *** processCapitalCityQuery ***
+    @Test
+    void testProcessCapitalCityQueryNull(){
+        a.processCapitalCityQuery(null);
+    }
+    @Test
+    void testProcessCapitalCityQuery(){
+        a.processCapitalCityQuery("query");
+    }
+    // *** useCase2 ***
+    @Test
+    void testUseCase2Basic() { a.useCase2("Africa");}
+    @Test
+    void testUseCase2Null() {
+        a.useCase2(null);
+    }
+    // *** useCase18 ***
+    @Test
+    void testUseCase18Basic() { a.useCase18(); }
+    // *** useCase20 ***
+    @Test
+    void testUseCase20BothWrong() { a.useCase20(null, 0); }
+    @Test
+    void testUseCase20WrongLimit() {
+        a.useCase20("Caribbean", -1);
+    }
+    @Test
+    void testUseCase20WrongRegion() {
+        a.useCase20(null, 4);
+    }
+    @Test
+    void testUseCase20Basic() {
+        a.useCase20("Caribbean", 5);
+    }
+    // *** useCase21 ***
+    @Test
+    void testUseCase21WrongRegion() { a.useCase21(null); }
+    @Test
+    void testUseCase21Basic() {
+        a.useCase21("Caribbean");
+    }
+    // *** useCase22 ***
+    @Test
+    void testUseCase22WrongLimit() {
+        a.useCase22(-1);
+    }
+    @Test
+    void testUseCase22Basic() {
+        a.useCase22(5);
+    }
+    // *** useCase23 ***
+    @Test
+    void testUseCase23BothWrong() { a.useCase23(null, 0); }
+    @Test
+    void testUseCase23WrongLimit() {
+        a.useCase23("Asia", -1);
+    }
+    @Test
+    void testUseCase23WrongContinent() {
+        a.useCase23(null, 5);
+    }
+    @Test
+    void testUseCase23Basic() {
+        a.useCase23("Asia", 5);
+    }
 }
