@@ -149,13 +149,25 @@ public class App {
         // Call population by country
         ArrayList<Population> allPopulationsCountry = new ArrayList<>();
         allPopulationsCountry = a.getPopulationInCityByCountry();
+        System.out.println("\nA report of the population of the people living in cities and outside cities in each country");
         displayPopulations(allPopulationsCountry, "Country");
         System.out.println("");
         System.out.println("");
+        
+        // Call population by continent
+        ArrayList<Population> allPopulationsContinent = new ArrayList<>();
+        allPopulationsRegion = a.getPopulationInCityByContinent();
+        System.out.println("\nA report of the population of the people living in cities and outside cities in each continent");
+        displayPopulations(allPopulationsContinent, "Continent");
+        System.out.println("");
+        System.out.println("");
+        
+     
 
         // Call population by region
         ArrayList<Population> allPopulationsRegion = new ArrayList<>();
         allPopulationsRegion = a.getPopulationInCityByRegion();
+        System.out.println("\nA report of the population of the people living in cities and outside cities in each region");
         displayPopulations(allPopulationsRegion, "Region");
         System.out.println("");
         System.out.println("");
