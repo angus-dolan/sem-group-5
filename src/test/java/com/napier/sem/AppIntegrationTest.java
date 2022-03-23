@@ -219,6 +219,20 @@ public class AppIntegrationTest {
         assertEquals(output.get(0).getName(), "Asia");
         assertEquals(output.get(1).getName(), "Europe");
     }
+    @Test //fifth
+    void testLanguage(){
+        Language l = new Language(100000, "Chinese", 10);
+        Language n = new Language();
+        l.setLanguage("Chinese");
+        l.setPercentage(10);
+        l.setPopulation(100000);
+        assertEquals(l.getLanguage(), "Chinese");
+        assertEquals(l.getPopulation(), 100000);
+        assertEquals(l.getPercentage(), 10);
+        assertEquals(n.getLanguage(), null);
+        assertEquals(n.getPopulation(), 0);
+        assertEquals(n.getPercentage(), 0);
+    }
 
 
 }

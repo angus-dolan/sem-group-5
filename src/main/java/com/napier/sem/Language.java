@@ -72,7 +72,7 @@ public class Language {
      * @param population population of speakers
      */
     public void setPopulation(long population) {
-        population = population;
+        this.population = population;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Language {
      * @param language language name
      */
     public void setLanguage(String language) {
-        language = language;
+        this.language = language;
     }
 
     /**
@@ -90,7 +90,7 @@ public class Language {
      * @param percentage percentage of world population
      */
     public void setPercentage(float percentage) {
-        percentage = percentage;
+        this.percentage = percentage;
     }
 
     // ToString Method
