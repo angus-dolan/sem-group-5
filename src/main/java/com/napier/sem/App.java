@@ -318,7 +318,6 @@ public class App {
                 System.out.println("***Not enough capital cities for limit provided.***");
             }
         }
-
         return res;
     }
     /**
