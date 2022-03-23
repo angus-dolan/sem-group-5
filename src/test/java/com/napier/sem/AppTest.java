@@ -324,6 +324,16 @@ class AppTest {
         displayLanguage(languages);
     }
     @Test
+    void testClassLanguage(){
+        Language c = new Language();
+        c.setLanguage("Chinese");
+        c.setPercentage(20);
+        c.setPopulation(15000);
+        c.getLanguage();
+        c.getPercentage();
+        c.getPopulation();
+    }
+    @Test
     void testDisplayLanguageNormal(){
         ArrayList <Language> languages = new ArrayList();
         Language l = new Language(900000, "Arabic", 17);
@@ -509,6 +519,19 @@ class AppTest {
         capCities.add(c);
         displayCapitalCities(capCities);
     }
+//    @Test
+//    void testDisplayPopulations(){
+//        ArrayList <Population> output = null;
+//        Population c = new Population();
+//        c.setCityPopulation(15000);
+//        c.setPopulation(150000);
+//        c.setCityPopulationPercent(10);
+//        c.setName("China");
+//        c.setNotCityPopulation(135000);
+//        c.setNonCityPopulationPercent(90);
+//        output.add(c);
+//
+//    }
     // *** processCapitalCityQuery ***
     @Test
     void testProcessCapitalCityQueryNull(){

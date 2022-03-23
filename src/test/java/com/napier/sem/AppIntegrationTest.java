@@ -69,6 +69,8 @@ public class AppIntegrationTest {
         assertEquals(top5.get(1).getName(), "India");
     }
 
+
+
     @Test
     void testgetNCitiesInContinent() {
         ArrayList<City> top5 = app.getNCitiesInContinent(2, "Asia");
@@ -196,6 +198,13 @@ public class AppIntegrationTest {
     void testGetPopulationInCityByRegion(){
         ArrayList<Population> top5 = app.getPopulationInCityByRegion();
         assertEquals(top5.get(0).getName(), "Australia and New Zealand");
+        assertEquals(top5.get(0).getPopulation(), 22753100);
+        assertEquals(top5.get(0).getNotCityPopulation(), 9589664);
+        assertEquals(top5.get(0).getNonCityPopulationPercent(), 42 );
+        assertEquals(top5.get(0).getCityPopulation(), 13163436 );
+        assertEquals(top5.get(0).getCityPopulationPercent(), 58 );
+        assertEquals(top5.get(0).getName(), "Australia and New Zealand");
+        assertEquals(top5.get(1).toString(), "Baltic Countries 7561900 2947140 39.0% 4614760 61.0% \n");
         assertEquals(top5.get(1).getName(), "Baltic Countries");
     }
     @Test // third
@@ -203,10 +212,16 @@ public class AppIntegrationTest {
         ResultSet rset = app.getLanguage();
         assertNotNull(rset);
     }
-    @Test //not currently printed
+    @Test //fourth
     void testGetPopulationInCityByContinent(){
         ArrayList<Population> output =  app.getPopulationInCityByContinent();
+
+        assertEquals(output.get(0).getName(), "Asia");
+        assertEquals(output.get(1).getName(), "Europe");
     }
 
+
 }
+
+
 

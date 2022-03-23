@@ -775,19 +775,7 @@ public class App {
         }
     }
 
-    /**
-     *
-     * @param populations takes the information about population living in cities and outside cities in order to print it out
-     * @param typeOfQuery takes the type of the exact query so it'll display it with the actual message
-     */
-    public static void DisplayPopulations(ArrayList<Population> populations, String typeOfQuery){
-        System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",  typeOfQuery , "Population", "City Population", "City Population %", "Non City Population", "Non City Population %"));
 
-        for(Population population : populations){
-            System.out.println(String.format("%-24s %-24s %-14s %-24s %-24s %-24s",
-                    population.getName(), population.getPopulation(), population.getCityPopulation(), population.getCityPopulationPercent(), population.getNotCityPopulation(), population.getNonCityPopulationPercent()));
-        }
-    }
 
     /**
      * Processes an SQL query to get a list of populations
