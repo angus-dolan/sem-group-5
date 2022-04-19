@@ -2,12 +2,12 @@ package com.napier.sem;
 
 public class Population {
 
-    private String name;
-    private long population;
-    private long cityPopulation;
-    private double cityPopulationPercent;
-    private long notCityPopulation;
-    private double nonCityPopulationPercent;
+    public String name;
+    public long population;
+    public long cityPopulation;
+    public double cityPopulationPercent;
+    public long notCityPopulation;
+    public double nonCityPopulationPercent;
 
     public String getName() {
         return name;

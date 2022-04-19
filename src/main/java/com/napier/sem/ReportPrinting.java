@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ReportPrinting {
@@ -173,6 +174,96 @@ public class ReportPrinting {
             System.out.println(cnt_string);
         }
     }
+
+    /**
+     * Helper method to print city population
+     * @param cities
+     */
+    public static void printCityPopulation(ArrayList<City> cities) {
+        if (cities == null) {
+            System.out.println("No city found");
+            return;
+        } else {
+            // Print header
+            System.out.println("Population of cities called: ");
+            for (City c : cities) {
+                if (c == null) {
+                    continue;
+                }
+                String c_string = c.getName() + " " + c.getPopulation();
+                System.out.println(c_string);
+            }
+            System.out.println(" ");
+        }
+    }
+
+    /**
+     * Helper method to print country population
+     * @param countries
+     */
+    public static void printCountryPopulation(Country countries) {
+        if (countries == null) {
+            System.out.println("No country found");
+            return;
+        } else {
+            System.out.println("Population of country: ");
+            System.out.println(countries.getName() + " - " + countries.getPopulation());
+            System.out.println(" ");
+            }
+    }
+
+    /**
+     * Helper method to print continent population
+     * @param population
+     */
+    public static void printContinentPopulation(Population population) {
+        if (population == null) {
+            System.out.println("No continent found");
+            return;
+        } else {
+            System.out.println("Population of continent: ");
+            System.out.println(population.getName() + " - " + population.getPopulation());
+            System.out.println(" ");
+        }
+    }
+
+    /**
+     * Helper method to print region population
+     * @param population
+     */
+    public static void printRegionPopulation(ArrayList<Population> population) {
+        if (population == null) {
+            System.out.println("No city found");
+            return;
+        } else {
+            // Print header
+            Population output = new Population();
+            System.out.println("Population of region called: ");
+            int id = population.size();
+            output = population.get(population.size()-1);
+
+                String c_string = output.getName() + " " + output.getPopulation();
+                System.out.println(c_string);
+
+            System.out.println(" ");
+        }
+    }
+
+    /**
+     * Helper method to print district population
+     * @param population
+     */
+    public static void printDistrictPopulation(Population population) {
+        if (population == null) {
+            System.out.println("No district found");
+            return;
+        } else {
+            System.out.println("Population district: ");
+            System.out.println(population.getName() + " - " + population.getPopulation());
+            System.out.println(" ");
+        }
+    }
+
 
     /**
      *
