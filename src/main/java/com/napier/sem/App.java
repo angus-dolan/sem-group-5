@@ -29,7 +29,7 @@ public class App {
         if(args.length < 1){
             a.connect("localhost:33060", 0);
         }else{
-            a.connect("db:3306", 10000);
+            a.connect("db:3306", 30000);
         }
 
         // Use case 2
