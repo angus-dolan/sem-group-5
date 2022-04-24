@@ -33,7 +33,7 @@ Release [![Releases](https://img.shields.io/github/release/angus-dolan/sem-group
 21 |The top N populated capital cities in a continent where N is provided by the user| Yes|![](images/top-N-capital-cities-continent.png)|
 22 |The top N populated capital cities in a region where N is provided by the user| Yes|![](images/top-N-capital-cities-region.png)|
 23 |The population of people, people living in cities, and people not living in cities in each continent| Yes|![](images/in-out-city-continent.png)|
-24 |The population of people, people living in cities, and people not living in cities in each region| Yes|![](imagesin-out-city-region.png/)|
+24 |The population of people, people living in cities, and people not living in cities in each region| Yes|![](images/in-out-city-region.png/)|
 25 |The population of people, people living in cities, and people not living in cities in each country| Yes|![](images/in-out-city-country.png)|
 26 |The population of the world| Yes|![](images/)|
 27 |The population of a continent| Yes||![](images/)
