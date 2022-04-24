@@ -42,4 +42,4 @@ Release [![Releases](https://img.shields.io/github/release/angus-dolan/sem-group
 29 |The population of a country| Yes|
 30 |The population of a district| Yes||
 31 |The population of a city| Yes||
-32 |The number of people who speak Chinese, English, Hindi, Spanish, Arabic, listed from greatest number \n to smallest, including the percentage of the world population| Yes||
+32 |The number of people who speak Chinese, English, Hindi, Spanish, Arabic, listed from greatest number to smallest, including the percentage of the world population| Yes||
