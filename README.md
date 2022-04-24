@@ -21,11 +21,11 @@ Release [![Releases](https://img.shields.io/github/release/angus-dolan/sem-group
 9 |All the cities in a region organised by largest population to smallest| Yes|![](images/all-cities-region-large-small-pop.png)|
 10 |All the cities in a country organised by largest population to smallest| Yes|![](images/all-cities-country-large-small-pop.png)|
 11 |All the cities in a district organised by largest population to smallest| Yes|![](images/all-cities-district-large-small-pop.png)|
-12 |The top N populated cities in the world where N is provided by the user| Yes|![](images/top-N-populated-cities-world.png)|
+12 |The top N populated cities in the world where N is provided by the user| Yes|![](images/top-pop-cities-world.png)|
 13 |The top N populated cities in a continent where N is provided by the user| Yes|![](images/top-populated-cities-continent.png)|
-14 |The top N populated cities in a region where N is provided by the user| Yes|![](images/top-populated-cities-region.png)|
-15 |The top N populated cities in a country where N is provided by the user| Yes|![](images/top-populated-cities-country.png)|
-16 |The top N populated cities in a district where N is provided by the user| Yes|![](images/top-populated-cities-district.png)|
+14 |The top N populated cities in a region where N is provided by the user| Yes|![](images/top-pop-cities-region.png)|
+15 |The top N populated cities in a country where N is provided by the user| Yes|![](images/top-pop-cities-country.png)|
+16 |The top N populated cities in a district where N is provided by the user| Yes|![](images/top-pop-cities-district.png)|
 17 |All the capital cities in the world organised by largest population to smallest| Yes|![](images/capital-cities-world-largest-smallest.png)|
 18 |All the capital cities in a continent organised by largest population to smallest| Yes|![](images/capital-cities-continent-largest-smallest.png)|
 19 |All the capital cities in a region organised by largest to smallest| Yes|![](images/capital-cities-region-largest-smallest.png)|
