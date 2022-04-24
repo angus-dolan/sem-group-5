@@ -8,3 +8,5 @@ License [![LICENSE](https://img.shields.io/github/license/angus-dolan/sem-group-
 
 Release [![Releases](https://img.shields.io/github/release/angus-dolan/sem-group-5/all.svg?style=flat-square)](https://github.com/angus-dolan/sem-group-5/releases)
 
+![](images/smile.jpeg)
+
