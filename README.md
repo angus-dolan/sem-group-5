@@ -35,10 +35,10 @@ Release [![Releases](https://img.shields.io/github/release/angus-dolan/sem-group
 23 |The population of people, people living in cities, and people not living in cities in each continent| Yes|![](images/in-out-city-continent.png)|
 24 |The population of people, people living in cities, and people not living in cities in each region| Yes|![](images/in-out-city-region.png/)|
 25 |The population of people, people living in cities, and people not living in cities in each country| Yes|![](images/in-out-city-country.png)|
-26 |The population of the world| Yes|![](images/pop-world)|
-27 |The population of a continent| Yes||![](images/pop-continent)
-28 |The population of a region| Yes|![](images/pop-region)|
-29 |The population of a country| Yes|![](images/pop-country)
-30 |The population of a district| Yes|![](images/pop-district)|
-31 |The population of a city| Yes|![](images/pop-city)|
+26 |The population of the world| Yes|![](images/pop-world.png)|
+27 |The population of a continent| Yes||![](images/pop-continent.png)
+28 |The population of a region| Yes|![](images/pop-region.png)|
+29 |The population of a country| Yes|![](images/pop-country.png)
+30 |The population of a district| Yes|![](images/pop-district.png)|
+31 |The population of a city| Yes|![](images/pop-city.png)|
 32 |The number of people who speak Chinese, English, Hindi, Spanish, Arabic, listed from greatest number to smallest, including the percentage of the world population| Yes|![](images/Chinese-hindi-spanish-english-arabic-population.png)|
